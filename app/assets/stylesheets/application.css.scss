@@ -71,3 +71,24 @@
  textarea.form-control {
     height: 100px;
 }
+.new_task, .new_task:focus{
+  font-family: 'Open Sans';
+  border-style: none;
+  outline: 0;
+  font-size: 15px;
+  background-color:transparent !important;
+  width:100% !important;
+  height:100%;
+}
+.input-group{
+  width: 100%;
+}
+.input-group-addon:first-child {
+    border-right: 0;
+    background-color: transparent;
+    outline: 0;
+    border-style: none;
+    width: 30px;
+    height: 30px;
+    background: url('iconsprite.png') -112px -5px;
+  }

@@ -10,46 +10,8 @@
   </div>
 
   <hr />
-  <table class="table">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-    <tr>
-      <td><%= f.label :name %></td>
-      <td>
-        <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control" %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :email %></td>
-      <td>
-        <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "form-control" %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :password %></td>
-      <td>
-        <%= f.password_field :password, autocomplete: "off", placeholder: "********", class: "form-control" %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :password_confirmation, :value => "Confirm" %><br /></td>
-      <td>
-      <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Re-enter password" %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :about %></td>
-      <td>
-        <%= f.text_area :about, autofocus: true, placeholder: "About with 139 characters", class: "form-control" %>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><%= f.submit "Sign Up", class:"btn btn-success btn-lg" %></td>
-    </tr>
+  <%= render 'form' %>
 
-    <% end %>
-  </table>
 
   <!--<%= render "users/shared/links" %> -->
 </div>
