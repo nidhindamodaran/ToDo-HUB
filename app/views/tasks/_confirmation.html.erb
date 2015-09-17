@@ -1,0 +1,15 @@
+<div class="panel-body">
+  <div class= "row">
+    <div class="col-sm-8 delete_confirmation">
+      Are you sure want to delete this entry ?
+    </div>
+    <div class="col-sm-4 delete_confirmation">
+      <div class = "col-sm-6">
+        <%= link_to ("<div class = 'delete_confirmation_button'>Yes</div>").html_safe, task_path(@id) , method: :delete %>
+      </div>
+      <div class = "col-sm-6">
+        <%= link_to ("<div class = 'delete_confirmation_cancel_button'><u>No</u></div>").html_safe, users_path %>
+      </div>
+    </div>
+  </div>
+</div>

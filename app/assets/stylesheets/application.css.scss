@@ -30,6 +30,15 @@
    height: 50px;
    margin: 20px 20px 0 0;
    padding-left: 10px;
+   background-color: #F3F3F3;
+
+ }
+ input.form-control:focus{
+   height: 50px;
+   margin: 20px 20px 0 0;
+   padding-left: 10px;
+   background-color: white;
+   box-shadow: none;
  }
  .form_cont{
    background: white;
@@ -92,3 +101,80 @@
     height: 30px;
     background: url('iconsprite.png') -112px -5px;
   }
+.task_title{
+  height:auto;
+  word-break: break-all;
+}
+.task_menu_btn{
+  width: 29px;
+  height: 29px;
+  outline: 0;
+  border-style: none;
+}
+.delete_button{
+  width: 29px;
+  height: 29px;
+  outline: 0;
+  border-style: none;
+  background: url("iconsprite.png") -77px 0px;
+}
+.delete_button:hover,.delete_button:active {
+  background: url("iconsprite.png") -77px -35px;
+}
+.up_button{
+  background: url("iconsprite.png") -33px 0px;
+}
+.up_button:hover, .up_button:active {
+  background: url("iconsprite.png") -33px -37px;
+}
+.down_button{
+  background: url("iconsprite.png") -6px 2px;
+}
+.down_button:hover, .down_button:active{
+  background: url("iconsprite.png") -6px -33px;
+}
+.comp_button{
+  background: url("iconsprite.png") -145px 0px;
+  width: 35px;
+  height: 36px;
+}
+.panel.task_add{
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+.panel.delete_box{
+  border:solid 1px #D01919;
+}
+.delete_confirmation{
+  font-size: 16px;
+  color: #34495e;
+  font-family: 'Open Sans'
+}
+.delete_confirmation_button{
+  border:solid 1px black;
+  color: #34495e;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  width:50px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+.delete_confirmation_cancel_button{
+  color:#34495e;
+  font-family: 'Open Sans';
+}
+.alert{
+  color:#34495e;
+  padding-left: 30px;
+}
+.navbar{
+  background: rgb(243, 242, 242) !important;
+  border: 0;
+  font-size: 16px;
+}
+.navbar-brand{
+  color:#524A8C;
+  font-size: 20px;
+  font-weight: bold;
+}

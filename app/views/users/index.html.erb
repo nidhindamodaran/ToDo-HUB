@@ -1,5 +1,4 @@
-<h1><%= current_user.name %></h1>
-<div class="panel panel-default">
+<div class="panel panel-default task_add">
   <div class="panel-body">
     <%= form_for current_user.tasks.build do |f| %>
       <div class = 'input-group'>
@@ -12,15 +11,14 @@
     <% end %>
   </div>
 </div>
-<% if current_user.tasks.count > 0 %>
-  <% current_user.tasks.reverse.each do |task| %>
-    <% if task.title.present? %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= task.title %>
-        </div>
-      </div>
-    <% end %>
+  <% if @tasks.count > 0 %>
+    <%= render @tasks %>
+  <% else %>
+
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Sorry!</strong> You dont have any tasks assigned.
+    </div>
   <% end %>
-<% end %>
+
 <%= link_to "Signout" ,destroy_user_session_path, method: :delete %>

@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-sm-8">
+      <div class= "task_title">
+        <%= task.title %>
+      </div>
+    </div>
+    <div class ="col-sm-4">
+      <div class = "col-sm-3">
+        <button class = 'task_menu_btn up_button' onclick=''></button>
+      </div>
+      <div class = "col-sm-3">
+        <button class = 'task_menu_btn down_button' onclick=''></button>
+      </div>
+      <div class = "col-sm-3">
+        <%= link_to ("<div class = 'delete_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
+      </div>
+
+      <div class = "col-sm-3">
+        <button class = 'task_menu_btn comp_button' onclick=''></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default delete_box" id = "confirm_delete_<%= task.id %>" style="display:none;">
+
+</div>
