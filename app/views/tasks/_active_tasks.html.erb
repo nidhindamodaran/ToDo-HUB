@@ -1,0 +1,10 @@
+<div class="tab-pane active" id="#active_tasks">
+  <% if @tasks.count > 0 %>
+    <%= render @tasks %>
+  <% else %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Sorry!</strong> You dont have any active tasks.
+    </div>
+  <% end %>
+</div>

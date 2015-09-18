@@ -1,23 +1,35 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="task_display_panel_<%= task.id %>">
   <div class="panel-body">
     <div class="col-sm-8">
-      <div class= "task_title">
-        <%= task.title %>
+      <div class = "col-sm-12">
+        <div class= "task_title">
+          <%= link_to task.title, task_path(task.id) %>
+        </div>
       </div>
+      <div class = "col-sm-12">
+        <div class= "task_date">
+          <%= task.created_at.strftime("%I.%M %p, %d %b %Y") %>
+        </div>
+      </div>
+
     </div>
     <div class ="col-sm-4">
       <div class = "col-sm-3">
-        <button class = 'task_menu_btn up_button' onclick=''></button>
+        <%= link_to ("<div class = 'task_menu_btn up_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
       </div>
       <div class = "col-sm-3">
-        <button class = 'task_menu_btn down_button' onclick=''></button>
+        <%= link_to ("<div class = 'task_menu_btn down_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
       </div>
       <div class = "col-sm-3">
         <%= link_to ("<div class = 'delete_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
       </div>
 
       <div class = "col-sm-3">
-        <button class = 'task_menu_btn comp_button' onclick=''></button>
+        <% if task.completed == false %>
+          <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+        <% else %>
+          <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+        <% end %>
       </div>
     </div>
   </div>

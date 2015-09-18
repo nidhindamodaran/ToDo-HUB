@@ -3,8 +3,17 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :tasks
-  get 'tasks/confirm_delete/:id' => 'tasks#confirm_delete'
+  resources :tasks do
+    member do
+      get 'confirm_delete'
+      get 'task_completion'
+    end
+    collection do
+      get 'active_tasks', :as => :active
+      get 'completed_tasks', :as => :completed
+      get 'task_requests', :as =>:requests
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

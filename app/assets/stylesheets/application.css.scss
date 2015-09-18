@@ -101,9 +101,16 @@
     height: 30px;
     background: url('iconsprite.png') -112px -5px;
   }
-.task_title{
+.task_title, .task_title a{
   height:auto;
   word-break: break-all;
+  font-size: 16px;
+  color:#34495e;
+}
+.task_date{
+  color:#999999;
+  font-size: 12px;
+  margin-top: 10px;
 }
 .task_menu_btn{
   width: 29px;
@@ -135,6 +142,22 @@
 }
 .comp_button{
   background: url("iconsprite.png") -145px 0px;
+  width: 35px;
+  height: 36px;
+}
+.comp_button:hover{
+  background: url("iconsprite.png") -145px -71px;
+  width: 35px;
+  height: 36px;
+}
+
+.comp_button.completed{
+  background: url("iconsprite.png") -145px -71px;
+  width: 35px;
+  height: 36px;
+}
+.comp_button.completed:hover{
+  background: url("iconsprite.png") -145px -108px;
   width: 35px;
   height: 36px;
 }
@@ -177,4 +200,7 @@
   color:#524A8C;
   font-size: 20px;
   font-weight: bold;
+}
+#show_tabs{
+  margin-top: 30px;
 }

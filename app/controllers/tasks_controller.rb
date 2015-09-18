@@ -1,14 +1,15 @@
 class TasksController < ApplicationController
   respond_to :html, :js
   def create
-   current_user.tasks.create(task_params)
+   @task = Task.new(task_params)
+   @task.user_id = current_user.id
+   @task.save
     redirect_to users_path
   end
 
   def destroy
-    @task = current_user.tasks.find(params[:id])
+    @task = Task.find(params[:id])
     @task.destroy
-    redirect_to users_path
   end
 
   def confirm_delete
@@ -17,8 +18,35 @@ class TasksController < ApplicationController
   end
   def show
   end
+
+  def active_tasks
+    @tasks = Task.where(completed: false, user_id: current_user.id)
+  end
+  def completed_tasks
+    @tasks = Task.where(completed: true)
+  end
+
+  def task_requests
+  end
+
+  def task_completion
+    @task = Task.find(params[:id])
+    if @task.completed == false
+      @task.completed = true
+    else
+      @task.completed = false
+    end
+    if @task.save
+      puts "error #{@task.inspect}"
+    else
+      render plain: "Error"
+    end
+  end
+
+
   private
   def task_params
     params.require(:task).permit(:title, :description)
   end
+
 end
