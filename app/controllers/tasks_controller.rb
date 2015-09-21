@@ -1,10 +1,15 @@
 class TasksController < ApplicationController
+  before_filter :authenticate_user!
   respond_to :html, :js
+  def index
+    @task = Task.new
+    @tasks = Task.where(user_id: current_user.id, completed: false)
+  end
   def create
    @task = Task.new(task_params)
    @task.user_id = current_user.id
    @task.save
-    redirect_to users_path
+    redirect_to tasks_path
   end
 
   def destroy
@@ -17,6 +22,7 @@ class TasksController < ApplicationController
     render 'confirm_delete'
   end
   def show
+    @task = Task.find(params[:id])
   end
 
   def active_tasks

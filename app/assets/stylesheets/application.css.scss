@@ -1,4 +1,5 @@
-@import "bootstrap";
+@import 'bootstrap';
+@import "flat-ui";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -12,16 +13,16 @@
  * file per style scope.
  *
  *= require todohub
- *= require_tree .
- *= require twitter/bootstrap
- *= require_self
  *= require bootstrap
-
+ *= require jquery-ui
+ *= require bootstrap_and_overrides
+ *= require flat-ui
+ *= require_tree .
+ *= require_self
  */
- $color_celeste_approx: rgba(226, 224, 224, 0.4);
 
  body {
- 	background: $color_celeste_approx !important;
+ 	background: rgba(226, 224, 224, 0.4) !important;
  }
  .container {
  	width: 800px;
@@ -74,8 +75,13 @@
  .link_panel.right{
    float:right;
  }
+ a{
+   text-decoration: none;
+   color:#34495e;
+ }
  a:hover{
    text-decoration: none;
+   color:#34495e;
  }
  textarea.form-control {
     height: 100px;
@@ -89,17 +95,27 @@
   width:100% !important;
   height:100%;
 }
+input.new_task, input.new_task:hover, input.new_task:focus{
+  font-family: 'Open Sans';
+  border-style: none;
+  outline: 0;
+  font-size: 15px;
+  color:#34495e;
+  width:100% !important;
+  height:60px;
+}
 .input-group{
   width: 100%;
+  background-color:white !important;
+  margin-bottom:90px;
 }
 .input-group-addon:first-child {
     border-right: 0;
-    background-color: transparent;
     outline: 0;
     border-style: none;
-    width: 30px;
-    height: 30px;
-    background: url('iconsprite.png') -112px -5px;
+    width: 28px;
+    height: 60px;
+    background: url('iconsprite.png') -109px 11px;
   }
 .task_title, .task_title a{
   height:auto;
@@ -203,4 +219,15 @@
 }
 #show_tabs{
   margin-top: 30px;
+}
+.task_completion_slider_box{
+  margin-left: 15px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #34495e;
+
+}
+#slider{
+  height:20px;
+  width: 680px;
 }

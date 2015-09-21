@@ -1,0 +1,22 @@
+<div class="panel panel-default task_add">
+  <div class="panel-body">
+    <div class="col-sm-8">
+      <div class = "col-sm-12">
+        <div class= "task_title">
+          <%= @task.title %>
+        </div>
+      </div>
+      <div class = "col-sm-12">
+        <div class= "task_date">
+          <%= @task.created_at.strftime("%I.%M %p, %d %b %Y") %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-sm-12 task_completion_slider_box">
+      Task Completion
+      <div id = 'slider'>
+
+      </div>
+    </div>
+  </div>
+</div>

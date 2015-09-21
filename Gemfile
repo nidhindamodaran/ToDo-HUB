@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+#gem 'jquery-sliders-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -26,6 +26,9 @@ gem 'devise'
 gem "therubyracer"
 gem "bootstrap-sass-rails", "~> 2.2.2.0"
 gem 'will_paginate', '~> 3.0.7'
+gem 'flat-ui-rails'
+gem 'jquery-ui-rails'
+#gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
