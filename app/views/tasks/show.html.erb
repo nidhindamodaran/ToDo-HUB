@@ -8,15 +8,13 @@
       </div>
       <div class = "col-sm-12">
         <div class= "task_date">
-          <%= @task.created_at.strftime("%I.%M %p, %d %b %Y") %>
+          <%= time_ago_in_words(@task.created_at) %>
         </div>
       </div>
     </div>
     <div class = "col-sm-12 task_completion_slider_box">
       Task Completion
-      <div id = 'slider'>
-
-      </div>
+        <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all', aria-disabled = 'false'></div>
     </div>
   </div>
 </div>

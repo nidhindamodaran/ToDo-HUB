@@ -6,9 +6,13 @@ var $slider = $("#slider");
 if ($slider.length > 0) {
   $slider.slider({
     min: 1,
-    max: 5,
-    value: 3,
+    max: 100,
+    value: 37,
     orientation: "horizontal",
-    range: "min"
-  }).addSliderSegments($slider.slider("option").max);
+    range: "min",
+    slide:function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.value );
+      }
+  });
+   $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
 }

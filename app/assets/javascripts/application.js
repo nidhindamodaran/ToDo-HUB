@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require twitter/bootstrap
 //= require bootstrap
+//= require flat-ui
 //= require tabs
 //= require turbolinks
