@@ -6,12 +6,14 @@ Rails.application.routes.draw do
     member do
       get 'confirm_delete'
       get 'task_completion'
+      get 'add_participants'
     end
     collection do
       get 'active_tasks', :as => :active
       get 'completed_tasks', :as => :completed
       get 'task_requests', :as =>:requests
     end
+    resources :comments
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

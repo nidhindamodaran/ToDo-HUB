@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commenter: 
+  comment: MyText
+  task_id: 
+
+two:
+  commenter: 
+  comment: MyText
+  task_id: 

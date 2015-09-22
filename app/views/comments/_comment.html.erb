@@ -1,0 +1,11 @@
+<li class="list-group-item comment">
+<%= comment.comment %>
+<div class = "comment_details">
+  <div class = "commenter_name">
+    <%= comment.user_name %>
+  </div>
+  <div class = "comment_date">
+    <%= time_ago_in_words(comment.created_at)  %> ago
+  </div>
+</div>
+</li>

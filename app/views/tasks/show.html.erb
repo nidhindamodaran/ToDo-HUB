@@ -1,4 +1,4 @@
-<div class="panel panel-default task_add">
+<div class="panel panel-default">
   <div class="panel-body">
     <div class="col-sm-8">
       <div class = "col-sm-12">
@@ -13,8 +13,26 @@
       </div>
     </div>
     <div class = "col-sm-12 task_completion_slider_box">
-      Task Completion
-        <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all', aria-disabled = 'false'></div>
+      <div class = "slider_header">
+        Task Completion
+      </div>
+      <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-sm-10', aria-disabled = 'false'></div>
+      <div class = 'col-sm-2'>
+        <% if @task.completed == false %>
+          <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+        <% else %>
+          <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+        <% end %>
+      </div>
+    </div>
+    <div class = 'col-sm-12'>
+      <button type="button" class="share_link" data-toggle="modal" data-target="#myModal">share</button>
     </div>
   </div>
+</div>
+<div class = 'comments_panel'>
+  <ul class="list-group">
+    <%= render @task.comments.reverse %>
+  </ul>
+  <%= render 'comments/form' %>
 </div>

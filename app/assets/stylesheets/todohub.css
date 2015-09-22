@@ -215,5 +215,36 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 
 }
 #slider {
-width: 700px;
+margin-top: 20px;
+}
+button.share_link{
+  border-radius: 4px;
+  border: 1px solid #34495e;
+  width:70px;
+  text-align: center;
+  vertical-align: middle;
+  color:#34495e;
+  margin-left: 15px;
+  background: white;
+}
+.new_comment{
+  font-family: 'Open Sans';
+  border-style: none;
+  outline: 0;
+  font-size: 15px;
+  background-color:white !important;
+  width:100% !important;
+  height:50px;
+  padding-left: 20px;
+}
+.comment_details{
+
+}
+.commenter_name{
+  color:#34495e;
+  font-size: 15px;
+}
+.comment_date{
+  color:#999999;
+  font-size: 12px;
 }

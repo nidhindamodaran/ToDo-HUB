@@ -22,6 +22,7 @@ class TasksController < ApplicationController
     render 'confirm_delete'
   end
   def show
+    @users = User.all
     @task = Task.find(params[:id])
   end
 
@@ -39,14 +40,19 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.completed == false
       @task.completed = true
+      @task.comments.create(user_name: current_user.name, comment:'Status changed to Done')
     else
       @task.completed = false
+      @task.comments.create(user_name: current_user.name, comment:'Status changed to UnDone')
     end
     if @task.save
-      puts "error #{@task.inspect}"
+      respond_with(@task) do |format|
+        format.html{redirect_to task_path(params[:id])}
+      end
     else
       render plain: "Error"
     end
+
   end
 
 
