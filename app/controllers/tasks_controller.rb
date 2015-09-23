@@ -3,13 +3,16 @@ class TasksController < ApplicationController
   respond_to :html, :js
   def index
     @task = Task.new
-    @tasks = Task.where(user_id: current_user.id, completed: false)
+    @tasks = current_user.tasks.where(completed:false)
+    #@tasks = Task.where(user_id: current_user.id, completed: false)
   end
   def create
-   @task = Task.new(task_params)
+   @task = current_user.tasks.new(task_params)
    @task.user_id = current_user.id
    @task.save
-    redirect_to tasks_path
+   @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed')
+   @participant.save
+  redirect_to tasks_path
   end
 
   def destroy
@@ -27,13 +30,15 @@ class TasksController < ApplicationController
   end
 
   def active_tasks
-    @tasks = Task.where(completed: false, user_id: current_user.id)
+    @tasks = current_user.tasks.where(completed:false)
   end
   def completed_tasks
     @tasks = Task.where(completed: true)
   end
 
   def task_requests
+    @participants  = Participant.where(status: "pending", user_id:current_user.id)
+    @tasks = Task.all
   end
 
   def task_completion
@@ -57,6 +62,8 @@ class TasksController < ApplicationController
 
   def add_participants
     @users = User.all
+    @participant = Participant.new
+    @task = Task.find(params[:id])
   end
 
 

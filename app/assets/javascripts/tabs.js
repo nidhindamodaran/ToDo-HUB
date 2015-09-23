@@ -16,3 +16,5 @@ if ($slider.length > 0) {
   });
    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
 }
+
+//popover

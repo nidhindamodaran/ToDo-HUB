@@ -29,8 +29,15 @@
       <%#= link_to ("<div class = 'share_link'>Share</div>").html_safe, controller: "tasks", action: "add_participants", id: @task.id , remote: true %>
       <div id = "users_list">
         <!-- for listing users -->
-        <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path, data:{remote: true} %>
+        <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
       </div>
+
+    </div>
+    <div class = "col-sm-12 shared_people">
+        <strong>Shared With :</strong>
+        <% @task.participants.each do |participant| %>
+          <%= link_to participant.user.name, user_path(participant.user) %>,
+        <% end %>
 
     </div>
   </div>

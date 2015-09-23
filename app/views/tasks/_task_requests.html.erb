@@ -1,3 +1,28 @@
-<div class="tab-pane active" id="#task_requests">
-     Task requests
+<div class="tab-pane active" id="task_requests">
+     <% if @participants.count > 0 %>
+      <% @participants.each do |participant| %>
+         <div class="panel panel-default" id="request_display_panel_<%= participant.id %>">
+             <div class="panel-body">
+                <div class = "col-sm-12">
+                  <div class = "col-sm-8">
+                      <%= link_to participant.task.title, task_path(participant.task) %> is shared with you.
+                  </div>
+                  <div class = "col-sm-4">
+                    <div class = "col-sm-6">
+                      <%= link_to ("<div class = 'share_link accept_request'>Accept</div>").html_safe, controller: 'participants', action:"accept_request", id:participant.id, remote:true %>
+                    </div>
+                    <div class = "col-sm-6">
+                      <%= link_to ("<div class = 'share_link decline_request'>Decline</div>").html_safe, participant_path(participant.id), method: :delete, remote:true %>
+                    </div>
+                  </div>
+                </div>
+             </div>
+         </div>
+      <% end %>
+     <% else %>
+         <div class="alert alert-danger">
+           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+           <strong>Sorry!</strong> You dont have any task requests.
+         </div>
+     <% end %>
 </div>

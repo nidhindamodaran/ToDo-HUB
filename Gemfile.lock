@@ -65,6 +65,7 @@ GEM
     flat-ui-rails (0.0.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -175,6 +176,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   flat-ui-rails
+  hirb
   jbuilder (~> 2.0)
   jquery-modal-rails
   jquery-rails

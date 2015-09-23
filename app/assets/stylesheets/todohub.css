@@ -220,12 +220,19 @@ margin-top: 20px;
 .share_link{
   border-radius: 4px;
   border: 1px solid #34495e;
-  width:70px;
+  width:100px;
   text-align: center;
   vertical-align: middle;
   color:#34495e;
   margin-left: 15px;
   background: white;
+}
+.share_link.cancel{
+  float:right;
+  color:darkred;
+}
+.share_link.button{
+  margin: 0 auto;
 }
 .new_comment{
   font-family: 'Open Sans';
@@ -256,4 +263,13 @@ margin-top: 20px;
 .modal{
   height:75%;
   padding:10px;
+}
+.share_link.accept_request {
+  float:right;
+  width:80px;
+}
+.shared_people{
+  color:#999999;
+  font-size: 12px;
+  margin-top: 10px;
 }
