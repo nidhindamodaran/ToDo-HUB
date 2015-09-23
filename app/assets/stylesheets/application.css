@@ -13,6 +13,7 @@
  *= require todohub
  *= require bootstrap
  *= require jquery-ui
+ *= require jquery.modal
  *= require todohub
  *= require flat-ui
  *= require_tree .

@@ -55,6 +55,10 @@ class TasksController < ApplicationController
 
   end
 
+  def add_participants
+    @users = User.all
+  end
+
 
   private
   def task_params

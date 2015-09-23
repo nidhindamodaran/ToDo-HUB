@@ -1,11 +1,21 @@
-<li class="list-group-item comment">
-<%= comment.comment %>
-<div class = "comment_details">
-  <div class = "commenter_name">
-    <%= comment.user_name %>
+<li class="list-group-item comment row">
+  <div class = "col-sm-12">
+    <div class = "col-sm-10">
+      <%= comment.comment %>
+        <div class = "comment_details">
+          <div class = "commenter_name">
+            <%= comment.user_name %>
+          </div>
+          <div class = "comment_date">
+            <%= time_ago_in_words(comment.created_at)  %> ago
+          </div>
+        </div>
+    </div>
+    <div class = "col-sm-2">
+      <% if comment.commenter == current_user.id %>
+        <%= link_to ("<div class = 'delete_button'> </div>").html_safe, [comment.task,comment], method: :delete %>
+      <% end %>
+    </div>
+
   </div>
-  <div class = "comment_date">
-    <%= time_ago_in_words(comment.created_at)  %> ago
-  </div>
-</div>
 </li>

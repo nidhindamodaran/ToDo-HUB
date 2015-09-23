@@ -1,0 +1,5 @@
+
+  <% @users.each do |user| %>
+    <%= user.name %><br \><hr>
+    <% end %>
+<%= link_to 'Cancel', users_path, :rel => "modal:close" %>

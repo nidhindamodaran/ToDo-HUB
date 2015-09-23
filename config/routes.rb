@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     member do
       get 'confirm_delete'
       get 'task_completion'
-      get 'add_participants'
+      get 'add_participants', as: :add_participants
     end
     collection do
       get 'active_tasks', :as => :active

@@ -217,7 +217,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 #slider {
 margin-top: 20px;
 }
-button.share_link{
+.share_link{
   border-radius: 4px;
   border: 1px solid #34495e;
   width:70px;
@@ -237,7 +237,9 @@ button.share_link{
   height:50px;
   padding-left: 20px;
 }
-.comment_details{
+.comment{
+  font-size: 16px;
+  font-weight: normal;
 
 }
 .commenter_name{
@@ -247,4 +249,11 @@ button.share_link{
 .comment_date{
   color:#999999;
   font-size: 12px;
+}
+.panel-heading{
+  text-align: center;
+}
+.modal{
+  height:75%;
+  padding:10px;
 }
