@@ -1,5 +1,11 @@
-<ul class="list-group users">
-  <% @users.each do |user| %>
-    <li class="list-group-item user"><span class="badge"><%= user.tasks.count%></span><%= link_to user.name, user_path(user.id) %></li>
-  <% end %>
-</ul>
+<div class = "row">
+  <div class = "col-sm-12">
+    <%= link_to "<- Go back to ToDos ", tasks_path %>
+  </div>
+  <ul class="col-sm-12 list-group users">
+    <% @users.each do |user| %>
+      <li class="list-group-item user"><span class="badge"><%= user.tasks.count%></span><%= link_to user.name, user_path(user.id) %></li>
+    <% end %>
+  </ul>
+
+</div>

@@ -1,13 +1,15 @@
  <% @users.each do |user| %>
-  <% unless user.tasks.include? @task %>
-    <%= form_tag @participant, remote:true do %>
-      <%= label_tag(:status, user.name)%>
-      <%= hidden_field_tag :user_id, user.id.to_i %>
-      <%= hidden_field_tag :task_id, @task.id.to_i %>
-      <%= button_tag :Request, {class: "share_link button", value: "Sent Request"} %> <br \><hr>
-    <% end %>
-  <% end %>
-  <% end %>
+   <div id = "participant_list_<%= user.id %>">
+      <% unless user.tasks.include? @task %>
+        <%= form_tag @participant, remote:true do %>
+          <%= label_tag(:status, user.name)%>
+          <%= hidden_field_tag :user_id, user.id.to_i %>
+          <%= hidden_field_tag :task_id, @task.id.to_i %>
+          <%= button_tag :Request, {class: "share_link button", value: "Sent Request"} %> <br \><hr>
+        <% end %>
+      <% end %>
+  </div>
+<% end %>
 
     <!-- link for Modal close button -->
 <%= link_to ("<div class = 'share_link cancel'>Cancel</div>").html_safe, users_path, :rel => "modal:close" %>

@@ -1,0 +1,26 @@
+<div class = "jumbotron">
+  <div class = "row">
+    <div class = "col-sm-12">
+      <div class = "col-sm-6">
+        <img src="andrew.png" class="img-circle" alt="Cinque Terre" width="200" height="200">
+      </div>
+      <div class = "col-sm-6">
+        <div class = "col-sm-12 user_show_name text-uppercase">
+          <%= @user.name %>
+        </div>
+        <div class ="col-sm-12 user_show_details">
+          <span class = "label label-success"><u><%= @tasks.count%></u> Own Tasks</span>
+          <span class = "label label-warning"><u><%= @user.tasks.count %></u> Working Tasks</span>
+        </div>
+        <div class = "col-sm-12 user_show_description">
+          <%= @user.about %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-sm-12 ">
+      <div class = "edit_profile_link">
+        <%= link_to "Edit Profile", edit_user_path(@user.id) %>
+      </div>
+    </div>
+  </div>
+</div>
