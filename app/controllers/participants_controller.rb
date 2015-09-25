@@ -1,4 +1,5 @@
 class ParticipantsController < ApplicationController
+  
   respond_to :html, :js
   def create
     participations = Participant.where(user_id:params[:user_id])

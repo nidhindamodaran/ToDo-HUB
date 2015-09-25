@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   respond_to :html, :js
   def index
     @task = Task.new
-    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
     #@tasks = Task.where(user_id: current_user.id, completed: false)
   end
   def create
@@ -38,10 +38,10 @@ class TasksController < ApplicationController
   end
 
   def active_tasks
-    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
   end
   def completed_tasks
-    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
+    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
   end
 
   def task_requests
@@ -77,10 +77,21 @@ class TasksController < ApplicationController
   def task_up
      @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
      priority = @participant.priority
-     
+     @other_participant = current_user.participants.where("priority < ?",priority).last
+     other_priority = @other_participant.priority
+     @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
+     @participant.save!
+     @other_participant.save!
   end
 
   def task_down
+    @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+    priority = @participant.priority
+    @other_participant = current_user.participants.where("priority > ?",priority).first
+    other_priority = @other_participant.priority
+    @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
+    @participant.save!
+    @other_participant.save!
   end
 
 

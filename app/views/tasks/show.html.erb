@@ -16,7 +16,7 @@
       <div class = "slider_header">
         Task Completion
       </div>
-      <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-sm-10', aria-disabled = 'false'></div>
+        <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-sm-10', aria-disabled = 'false'></div>
       <div class = 'col-sm-2'>
         <% if @task.completed == false %>
           <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>

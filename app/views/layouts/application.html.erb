@@ -17,14 +17,23 @@
     <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to "Check", users_path , class:"navbar-brand" %>
+        <%= link_to "Check", tasks_path , class:"navbar-brand" %>
       </div>
     <ul class="nav navbar-nav navbar-right">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><%= current_user.name %>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header"><%= link_to current_user.email, user_path(current_user) %></li>
+                  <li><%= link_to "Users List", users_path%></li>
+                  <li><%= link_to "Tasks List", tasks_path%></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Account</li>
+                  <li><%= link_to "Logout", destroy_user_session_path , method: :delete %></li>
+                </ul>
+              </div>
       <li>
-        <a href="#" data-toggle="popover" title="<%= current_user.email %>" data-content="Change Password" data-placement="bottom"><%= current_user.name %></a>
-      </li>
-      <li>
-        <%= link_to "Logout", destroy_user_session_path , method: :delete %>
+
       </li>
     </ul>
     </div>

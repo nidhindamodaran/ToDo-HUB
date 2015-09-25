@@ -214,9 +214,6 @@ input.new_task, input.new_task:hover, input.new_task:focus{
  color: #34495e;
 
 }
-#slider {
-margin-top: 20px;
-}
 .share_link{
   border-radius: 4px;
   border: 1px solid #34495e;
@@ -329,4 +326,32 @@ margin-top: 20px;
 .prof_img{
   text-align: center;
   vertical-align: middle;
+}
+
+
+.ui-slider .ui-slider-handle {
+    height: 20px;
+    width: 5px;
+    padding-left: 5px; //add this
+}
+.ui-slider {
+  height:20px;
+  border-radius: 0px;
+}
+.ui-slider-horizontal .ui-slider-handle {
+top:0px;
+margin-left: -5px;
+display:none;
+}
+
+
+.btn-default.dropdown-toggle, .btn-default.dropdown-toggle:hover{
+  background-color: transparent;
+  color: #34495e;
+  box-shadow: none;
+}
+.dropdown-header{
+    color:#34495e !important;
+    text-transform: none !important;
+    font-size: 16px !important;
 }

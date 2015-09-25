@@ -1,0 +1,12 @@
+div1 = $('#task_display_panel_<%= @participant.task_id %>');
+div2 = $('#task_display_panel_<%= @other_participant.task_id %>');
+
+tdiv1 = div1.clone();
+tdiv2 = div2.clone();
+
+if(!div2.is(':empty')){
+    div1.replaceWith(tdiv2);
+    div2.replaceWith(tdiv1);
+
+    tdiv1.addClass("replaced");
+}
