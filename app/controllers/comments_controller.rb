@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  respond_to :html, :js
   def create
     @task = Task.find(params[:task_id])
     @comment = @task.comments.new(comment_params)

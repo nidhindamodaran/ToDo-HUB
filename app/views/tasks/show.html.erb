@@ -45,7 +45,7 @@
 
 
 <div class = 'comments_panel'>
-  <ul class="list-group">
+  <ul class="list-group", id="comments_listing">
     <%= render @task.comments.reverse %>
   </ul>
   <%= render 'comments/form' %>

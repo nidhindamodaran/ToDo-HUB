@@ -7,6 +7,7 @@ class TasksController < ApplicationController
     #@tasks = Task.where(user_id: current_user.id, completed: false)
   end
   def create
+   @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
    @task = current_user.tasks.new(task_params)
    @task.user_id = current_user.id
    @task.save
@@ -19,7 +20,6 @@ class TasksController < ApplicationController
      @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:1)
    end
     @participant.save
-  redirect_to tasks_path
   end
 
   def destroy
