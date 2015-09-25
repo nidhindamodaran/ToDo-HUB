@@ -1,7 +1,19 @@
 class ParticipantsController < ApplicationController
   respond_to :html, :js
   def create
-    @participant = Participant.create(participant_params)
+    participations = Participant.where(user_id:params[:user_id])
+    if participations.count > 0
+      last_priority = participations.last.priority.to_i
+      priority = last_priority + 1
+      @participant = Participant.new(participant_params)
+      @participant.priority = priority
+    else
+      @participant = Participant.new(participant_params)
+      @participant.priority = 1
+    end
+      if @participant.save
+        flash[:notice]="Request sent successfully"
+      end
   end
   def accept_request
     @participant = Participant.find(params[:id])

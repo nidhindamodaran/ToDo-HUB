@@ -15,10 +15,12 @@
     </div>
     <div class ="col-sm-4">
       <div class = "col-sm-3">
-        <%= link_to ("<div class = 'task_menu_btn up_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
+        <% unless task == current_user.tasks.first %>
+          <%= link_to ("<div class = 'task_menu_btn up_button'> </div>").html_safe, controller: "tasks", action: "task_up", id: task.id , remote: true %>
+        <% end %>
       </div>
       <div class = "col-sm-3">
-        <%= link_to ("<div class = 'task_menu_btn down_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
+        <%= link_to ("<div class = 'task_menu_btn down_button'> </div>").html_safe, controller: "tasks", action: "task_down", id: task.id , remote: true %>
       </div>
       <div class = "col-sm-3">
         <%= link_to ("<div class = 'delete_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>

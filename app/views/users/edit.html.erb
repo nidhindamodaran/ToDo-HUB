@@ -1,6 +1,13 @@
 <div class = "jumbotron">
-  <%= form_for @user do |f|%>
-    <%=  f.text_field :name %>
-    <%= f.submit :submit %>
+  <%= form_for @user ,html: { multipart: true } do |f|%>
+    <div class = "prof_img">
+      <%= image_tag @user.avatar.url(:medium), class: "img-circle" %>
+    </div>
+    <%=  f.text_field :name, class:'form-control', autofocus:true %>
+    <%=  f.text_area :about, class:'form-control', autofocus:true %>
+    <span class="btn btn-default btn-file">
+      Select Profile Picture <%= f.file_field :avatar, class:'btn btn-warning form-control' %>
+    </span>
+    <%= f.submit :submit, class: "btn btn-success form-control" %>
   <% end %>
 </div>

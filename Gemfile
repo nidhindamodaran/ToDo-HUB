@@ -29,6 +29,8 @@ gem 'will_paginate', '~> 3.0.7'
 gem 'flat-ui-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-modal-rails'
+# gem for uploading profile picture
+gem 'paperclip'
 #gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 
 # Use ActiveModel has_secure_password

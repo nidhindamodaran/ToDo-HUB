@@ -3,15 +3,22 @@ class TasksController < ApplicationController
   respond_to :html, :js
   def index
     @task = Task.new
-    @tasks = current_user.tasks.where(completed:false)
+    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
     #@tasks = Task.where(user_id: current_user.id, completed: false)
   end
   def create
    @task = current_user.tasks.new(task_params)
    @task.user_id = current_user.id
    @task.save
-   @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed')
-   @participant.save
+   participations = Participant.where(user_id:current_user.id)
+   if participations.count > 0
+     last_priority = participations.last.priority.to_i
+     priority = last_priority + 1
+     @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:priority)
+   else
+     @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:1)
+   end
+    @participant.save
   redirect_to tasks_path
   end
 
@@ -27,13 +34,14 @@ class TasksController < ApplicationController
   def show
     @users = User.all
     @task = Task.find(params[:id])
+
   end
 
   def active_tasks
-    @tasks = current_user.tasks.where(completed:false)
+    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
   end
   def completed_tasks
-    @tasks = Task.where(completed: true)
+    @tasks = Task.joins(:participants).where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
   end
 
   def task_requests
@@ -64,6 +72,15 @@ class TasksController < ApplicationController
     @users = User.all
     @participant = Participant.new
     @task = Task.find(params[:id])
+  end
+
+  def task_up
+     @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+     priority = @participant.priority
+     
+  end
+
+  def task_down
   end
 
 

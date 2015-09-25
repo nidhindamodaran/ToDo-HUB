@@ -84,7 +84,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
  width:100% !important;
  height:60px;
 }
-.input-group{
+.input-group.task{
  width: 100%;
  background-color:white !important;
  margin-bottom:90px;
@@ -263,6 +263,8 @@ margin-top: 20px;
 .modal{
   height:75%;
   padding:10px;
+  overflow:scroll;
+  position: relative;
 }
 .share_link.accept_request {
   float:right;
@@ -293,4 +295,38 @@ margin-top: 20px;
   font-family: 'Open Sans';
   float:right;
   color:#34495e;
+}
+.edit_name{
+  font-family: 'Open Sans';
+  border:1px solid black;
+  outline: 0;
+  font-size: 15px;
+  background-color:white !important;
+  width:100% !important;
+  height:100%;
+  padding-left: 15px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin: 20px 20px 0 0;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.prof_img{
+  text-align: center;
+  vertical-align: middle;
 }
