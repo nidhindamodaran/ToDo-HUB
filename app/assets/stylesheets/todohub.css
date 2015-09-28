@@ -25,18 +25,19 @@ input.form-control:focus{
 	background: white;
 	width:800px;
 	padding:20px;
-	margin-top: 100px;
+	margin-top: 50px;
 	box-shadow: 0 4px 5px -2px #BFBBBB;
 }
 .link_panel.inactive{
  font-family: 'Open Sans';
 	color:#cccccc;
+  font-weight: lighter;
 
 }
 .link_panel.active{
 	font-family: 'Open Sans';
 	 color:#34495e;
-
+    font-weight: lighter;
  }
 
 .table th, .table td {
@@ -354,4 +355,52 @@ display:none;
     color:#34495e !important;
     text-transform: none !important;
     font-size: 16px !important;
+}
+#slider{
+  width:600px;
+  height:20px;
+}
+#completion_perc {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 2px;
+  left: 300px;
+  z-index: 1;
+}
+#slider_group {
+  position: relative;
+}
+.ui-slider-range {
+    background-color: #1abc9c !important;
+}
+#total_completion_perc{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 18px;
+  left: 300px;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: bold;
+}
+#total_progress{
+  width:550px;
+  height: 20px;
+}
+.progress.progress-bar{
+  height:20px;
+}
+.logo{
+  width: 135px;
+  height: 46px;
+  background: url('logo.png');
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.ui-slider-range{
+  background: #fff;
+}
+.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min{
+background: rgb(255, 255, 255);
 }

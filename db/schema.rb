@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924074318) do
+ActiveRecord::Schema.define(version: 20150928072713) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "commenter"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150924074318) do
     t.integer  "task_id"
     t.integer  "priority"
     t.string   "status",      default: "pending"
-    t.integer  "progression"
+    t.integer  "progression", default: 0
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150924074318) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.boolean  "completed",   default: false
   end
 

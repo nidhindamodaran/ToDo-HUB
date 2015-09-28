@@ -19,7 +19,9 @@
     </div>
     <div class = "col-sm-12 ">
       <div class = "edit_profile_link">
-        <%= link_to_modal ("<div class = 'share_link'>Edit Profile</div>").html_safe, edit_user_path(@user.id), data:{remote: true} %>
+        <% if @user.id == current_user.id %>
+          <%= link_to_modal ("<div class = 'share_link'>Edit Profile</div>").html_safe, edit_user_path(@user.id), data:{remote: true} %>
+        <% end %>
       </div>
     </div>
   </div>

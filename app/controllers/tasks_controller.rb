@@ -12,6 +12,7 @@ class TasksController < ApplicationController
    @task.user_id = current_user.id
    @task.save
    participations = Participant.where(user_id:current_user.id)
+   #p "#{participations.count} .........................................................asdfffffffffffffffffffffffff"
    if participations.count > 0
      last_priority = participations.last.priority.to_i
      priority = last_priority + 1
@@ -19,7 +20,7 @@ class TasksController < ApplicationController
    else
      @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:1)
    end
-    @participant.save
+     @participant.save
   end
 
   def destroy
@@ -28,13 +29,16 @@ class TasksController < ApplicationController
   end
 
   def confirm_delete
-    @id = params[:id]
+    @task = Task.find(params[:id])
+    @participant = Participant.find_by_task_id(params[:id])
     render 'confirm_delete'
   end
   def show
     @users = User.all
     @task = Task.find(params[:id])
-
+    @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+    @participants = Participant.where(task_id:params[:id])
+    @total_completion = Participant.find_total_progression(params[:id])
   end
 
   def active_tasks

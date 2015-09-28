@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'add_participants', as: :add_participants
       get 'task_up'
       get 'task_down'
+
     end
     collection do
       get 'active_tasks', :as => :active
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   resources :participants do
     member do
       get 'accept_request'
+      get 'set_progression'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

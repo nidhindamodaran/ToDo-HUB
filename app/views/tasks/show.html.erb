@@ -13,23 +13,47 @@
       </div>
     </div>
     <div class = "col-sm-12 task_completion_slider_box">
-      <div class = "slider_header">
-        Task Completion
+      <!-- Overall task percentage -->
+      <% if @task.user_id == current_user.id %>
+          <div class = "col-sm-12 overall_progress">
+            <div class = "slider_header">
+              Overall Task Completion
+            </div>
+            <div class = "col-sm-10">
+              <div id = "total_progress", class="progress">
+                <div class="progress-bar progress-bar-info" style="width: <%= @total_completion %>%;"></div>
+                <span id="total_completion_perc"><%= @total_completion.to_i %>%</span>
+              </div>
+            </div>
+            <div class ='col-sm-2'>
+                  <% if @task.completed == false %>
+                    <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+                  <% else %>
+                    <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+                  <% end %>
+            </div>
+          </div>
+      <% end %>
+      <!---------------------------------------->
+      <div class = "col-sm-10">
+        <div class = "slider_header">
+          Task Completion
+        </div>
+        <div id="slider_group">
+					<div id="slider"></div>
+					<span id="completion_perc"><%= @participant.progression.to_i %>%</span>
+				</div>
       </div>
-        <div id = 'slider', class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-sm-10', aria-disabled = 'false'></div>
-      <div class = 'col-sm-2'>
-        <% if @task.completed == false %>
-          <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
-        <% else %>
-          <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
-        <% end %>
-      </div>
+
     </div>
     <div class = 'col-sm-12'>
       <%#= link_to ("<div class = 'share_link'>Share</div>").html_safe, controller: "tasks", action: "add_participants", id: @task.id , remote: true %>
       <div id = "users_list">
         <!-- for listing users -->
-        <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
+
+        <% unless (@participants.count == @users.count)||(@task.user_id!= current_user.id) %>
+          <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
+        <% end %>
       </div>
 
     </div>
@@ -44,9 +68,56 @@
 </div>
 
 
+
+
 <div class = 'comments_panel'>
   <ul class="list-group", id="comments_listing">
     <%= render @task.comments.reverse %>
   </ul>
   <%= render 'comments/form' %>
 </div>
+<span id= "task_id", display:none>
+  <%= @task_id %>
+</span>
+</form>
+
+
+<script>
+var $slider = $("#slider");
+var Count=0;
+if ($slider.length > 0) {
+  $slider.slider({
+    min: 0,
+    max: 100,
+    value: 0,
+    orientation: "horizontal",
+    range: "min",
+    change: function( event, ui ) {
+    var id=parseInt($("#task_id").html());
+    var progress=$(this).slider("value");
+    $("#completion_perc").html(progress+"%");
+    Count++;
+    setTimeout(function(){
+      Count--;
+      if(Count<=0) {
+        $.ajax({
+        url: '/participants/<%= @task.id %>/set_progression',
+        type: "GET",
+          data: { progress:progress },
+          success: function(result) {
+            alert('successfully changed');
+            IsWaiting=false;
+          }
+        });
+      }
+    }, 5000);
+
+    }
+
+  });
+}
+if (<%= @task.completed == true %>) {
+  $('#slider').slider({ disabled: true });
+}
+
+</script>
