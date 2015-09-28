@@ -21,8 +21,7 @@
       </div>
     <ul class="nav navbar-nav navbar-right">
               <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><%= current_user.name %>
-                <span class="caret"></span></button>
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><%= current_user.name %></button>
                 <ul class="dropdown-menu">
                   <li class="dropdown-header"><%= link_to current_user.email, user_path(current_user) %></li>
                   <li><%= link_to "Users List", users_path%></li>
