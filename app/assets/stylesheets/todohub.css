@@ -107,7 +107,12 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 .task_date{
  color:#999999;
  font-size: 12px;
- margin-top: 10px;
+ margin-top: 3px;
+}
+.task_author{
+  color:#999999;
+  font-size: 12px;
+  margin-top: 5px;
 }
 .task_menu_btn{
  width: 29px;

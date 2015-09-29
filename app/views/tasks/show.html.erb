@@ -7,6 +7,9 @@
         </div>
       </div>
       <div class = "col-sm-12">
+        <div class = "task_author">
+          Created by <b><%= link_to @creator.name, user_path(@creator.id) %></b>
+        </div>
         <div class= "task_date">
           <%= time_ago_in_words(@task.created_at) %>
         </div>
@@ -60,7 +63,9 @@
     <div class = "col-sm-12 shared_people">
         <strong>Shared With :</strong>
         <% @task.participants.each do |participant| %>
-          <%= link_to participant.user.name, user_path(participant.user) %>,
+          <% if participant.status == 'confirmed' %>
+            <%= link_to participant.user.name, user_path(participant.user) %>,
+          <% end %>
         <% end %>
 
     </div>
@@ -85,13 +90,14 @@
 <script>
 var $slider = $("#slider");
 var Count=0;
-if ($slider.length > 0) {
   $slider.slider({
     min: 0,
     max: 100,
     value: 0,
     orientation: "horizontal",
-    range: "min",
+    range:'min',
+    animate: "fast",
+    value: '<%= @participant.progression.to_i %>',
     change: function( event, ui ) {
     var id=parseInt($("#task_id").html());
     var progress=$(this).slider("value");
@@ -105,7 +111,7 @@ if ($slider.length > 0) {
         type: "GET",
           data: { progress:progress },
           success: function(result) {
-            alert('successfully changed');
+            $('#total_completion_perc').html('<%= @participant.progression.to_i %>%')
             IsWaiting=false;
           }
         });
@@ -115,7 +121,6 @@ if ($slider.length > 0) {
     }
 
   });
-}
 if (<%= @task.completed == true %>) {
   $('#slider').slider({ disabled: true });
 }

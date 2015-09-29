@@ -19,7 +19,7 @@ class ParticipantsController < ApplicationController
         @participant.save
       end
     end
-
+    redirect_to task_path(params[:task_id])
   end
 
   def accept_request

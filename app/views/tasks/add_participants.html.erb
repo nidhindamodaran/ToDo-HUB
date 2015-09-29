@@ -1,4 +1,4 @@
-<%= form_tag @participant, remote:true do %>
+<%= form_tag @participant do %>
   <% @users.each do |user| %>
     <div id="participant_list_<%= user.id %>">
       <% unless user.tasks.include? @task %>
@@ -8,7 +8,7 @@
       <% end %>
     </div>
   <% end %>
-  <%= button_tag :Save, {class: "share_link button", value: "Sent Request"} %>
+  <%= button_tag :Save, {class: "share_link button", value: "Sent Request"}%>
 <% end %>
 
 

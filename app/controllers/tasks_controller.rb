@@ -36,6 +36,7 @@ class TasksController < ApplicationController
   def show
     @users = User.all
     @task = Task.find(params[:id])
+    @creator = User.find(@task.user_id)
     @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
     @participants = Participant.where(task_id:params[:id])
     @total_completion = Participant.find_total_progression(params[:id])
