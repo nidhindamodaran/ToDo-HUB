@@ -49,12 +49,14 @@ class TasksController < ApplicationController
   def active_tasks
     @tasks = Task.joins(:participants).
                   order('participants.priority asc').
-                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
+                  paginate(:page => params[:page], :per_page => 10)
   end
   def completed_tasks
     @tasks = Task.joins(:participants).
                   order('participants.priority asc').
-                  where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:true).
+                  paginate(:page => params[:page], :per_page => 10)
   end
 
   def task_requests

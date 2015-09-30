@@ -1,4 +1,4 @@
-<div class="tab-pane active" id="#completed_tasks">
+<div class="tab-pane active" id="tasks_lists">
     <% if @tasks.count > 0 %>
       <%= render @tasks %>
     <% else %>
@@ -8,3 +8,4 @@
       </div>
     <% end %>
 </div>
+<%= will_paginate @tasks %>

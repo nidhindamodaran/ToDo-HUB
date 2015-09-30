@@ -1,2 +1,6 @@
 $('#tasks_lists').append('<%= escape_javascript render(@tasks) %>');
-$('.pagination').replaceWith('<%= escape_javascript will_paginate(@tasks) %>');
+<% if @tasks.next_page %>
+  $('.pagination').replaceWith('<%= escape_javascript will_paginate(@tasks) %>');
+<%else %>
+  $('.pagination').remove();
+<%end%>
