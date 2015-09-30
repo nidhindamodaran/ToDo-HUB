@@ -7,7 +7,8 @@ class TasksController < ApplicationController
     @task = Task.new
     @tasks = Task.joins(:participants).
                   order('participants.priority asc').
-                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
+                  paginate(:page => params[:page], :per_page => 10)
   end
 
 
