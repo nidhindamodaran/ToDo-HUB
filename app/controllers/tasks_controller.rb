@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants]
+  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants, :edit, :update]
   respond_to :html, :js
 
   def index
@@ -33,6 +33,9 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
+    respond_with(@task) do |format|
+      format.html{redirect_to tasks_path}
+    end
   end
 
   def confirm_delete
@@ -60,7 +63,7 @@ class TasksController < ApplicationController
   end
 
   def task_requests
-    @participants  = Participant.where(status: "pending", user_id:current_user.id)
+    @participants  = Participant.where(status: "pending", user_id:current_user.id).paginate(:page => params[:page], :per_page => 10)
     @tasks = Task.all
   end
 
@@ -106,6 +109,14 @@ class TasksController < ApplicationController
     @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
     @participant.save!
     @other_participant.save!
+  end
+
+  def edit
+  end
+
+  def update
+    @task.update_attributes(task_params)
+    redirect_to task_path(@task.id)
   end
 
 

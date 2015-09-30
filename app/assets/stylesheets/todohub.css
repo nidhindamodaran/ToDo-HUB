@@ -397,7 +397,7 @@ display:none;
   height:20px;
 }
 .logo{
-  width: 135px;
+  width: 134px;
   height: 46px;
   background: url('logo.png');
   margin: 0 auto;
@@ -408,4 +408,34 @@ display:none;
 }
 .ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min{
 background: rgb(255, 255, 255);
+}
+#ajax_loader_img{
+  margin-left: 350px;
+  position: absolute;
+}
+.task_delete_link{
+  float:right;
+  width:50px;
+  height:20px;
+  margin-left: 20px;
+}
+.task_edit_link{
+  width:50px;
+  height:20px;
+  float:right;
+}
+a.close-modal {
+    top: -1.5px !important;
+    right: -4.5px !important;
+
+}
+.task_desc{
+  font-size: 12px;
+  color:#999999;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.task_desc_head{
+  color:#34495e;
+  font-weight: bold;
 }

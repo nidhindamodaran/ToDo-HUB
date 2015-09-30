@@ -18,16 +18,3 @@
 //= require jquery.modal
 //= require tabs
 //= require turbolinks
-
-$(document).ready(function() {
-  if ($('.pagination').length) {
-    $(window).scroll(function() {
-      var url = $('.pagination .next_page').attr('href');
-      if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 10) {
-        $('.pagination').html('<center><img src="ajax-load.gif" alt="Loading..." title="Loading..." /></center>');
-        return $.getScript(url);
-      }
-    });
-    return $(window).scroll();
-  }
-});

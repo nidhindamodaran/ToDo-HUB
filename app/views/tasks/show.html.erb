@@ -5,6 +5,7 @@
         <div class= "task_title">
           <%= @task.title %>
         </div>
+
       </div>
       <div class = "col-sm-12">
         <div class = "task_author">
@@ -15,6 +16,17 @@
         </div>
       </div>
     </div>
+    <% if @task.user_id == current_user.id %>
+        <div class = "col-sm-4">
+          <div class = "task_delete_link">
+            <%= link_to ("<div class = 'delete_button'> </div>").html_safe, task_path(@task.id), method: :delete %>
+          </div>
+          <div class= "task_edit_link">
+            <%#= link_to ("<div class = 'share_link'>Edit</div>").html_safe, edit_task_path(@task.id)%>
+            <%= link_to_modal  '<i class="glyphicon glyphicon-pencil"></i>'.html_safe, edit_task_path(@task) %>
+          </div>
+        </div>
+    <% end %>
     <div class = "col-sm-12 task_completion_slider_box">
       <!-- Overall task percentage -->
       <% if @task.user_id == current_user.id %>
@@ -68,6 +80,9 @@
           <% end %>
         <% end %>
 
+    </div>
+    <div class = "col-sm-12 task_desc">
+      <span class = "task_desc_head"> Description: </span><%= @task.description if @task.description.present?%>
     </div>
   </div>
 </div>

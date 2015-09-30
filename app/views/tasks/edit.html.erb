@@ -1,0 +1,7 @@
+<div class = "jumbotron">
+  <%= form_for @task do |f|%>
+    <%=  f.text_field :title, class:'form-control', autofocus:true %>
+    <%=  f.text_area :description, class:'form-control', autofocus:true, placeholder:"Enter Description here" %>
+    <%= f.submit :submit, value:"Save", class: "btn btn-success form-control" %>
+  <% end %>
+</div>
