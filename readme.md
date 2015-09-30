@@ -6,5 +6,6 @@ Simple todo app using rails 4
 
 * rvm install 2.2.2
 * git clone https://github.com/nidhinnambiar/ToDo-HUB.git
+* rake db:migrate
 * bundle install
 * rails s
