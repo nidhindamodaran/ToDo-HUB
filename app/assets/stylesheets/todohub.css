@@ -253,7 +253,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 
 }
 .commenter_name{
-  color:#34495e;
+  color:#999999;
   font-size: 15px;
 }
 .comment_date{

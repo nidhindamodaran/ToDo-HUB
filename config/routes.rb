@@ -23,6 +23,10 @@ Rails.application.routes.draw do
       get 'accept_request'
       get 'set_progression'
     end
+    collection do
+      post :set_progression
+    end
+
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

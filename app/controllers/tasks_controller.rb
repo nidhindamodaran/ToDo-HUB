@@ -2,18 +2,24 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants]
   respond_to :html, :js
+
   def index
     @task = Task.new
-    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
-    #@tasks = Task.where(user_id: current_user.id, completed: false)
+    @tasks = Task.joins(:participants).
+                  order('participants.priority asc').
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
   end
+
+
   def create
-   @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+   @tasks = Task.joins(:participants).
+                 order('participants.priority asc').
+                 where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
    @task = current_user.tasks.new(task_params)
    @task.user_id = current_user.id
    @task.save
+   #-- creating participant entry for task author
    participations = Participant.where(user_id:current_user.id)
-   #p "#{participations.count} .........................................................asdfffffffffffffffffffffffff"
    if participations.count > 0
      last_priority = participations.last.priority.to_i
      priority = last_priority + 1
@@ -25,17 +31,14 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    #@task = Task.find(params[:id])
     @task.destroy
   end
 
   def confirm_delete
-    #@task = Task.find(params[:id])
     @participant = current_user.participants.find_by_task_id(@task.id)
   end
   def show
     @users = User.all
-    #@task = Task.find(params[:id])
     @creator = User.find(@task.user_id)
     @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
     @participants = Participant.where(task_id:params[:id])
@@ -43,10 +46,14 @@ class TasksController < ApplicationController
   end
 
   def active_tasks
-    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
+    @tasks = Task.joins(:participants).
+                  order('participants.priority asc').
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
   end
   def completed_tasks
-    @tasks = Task.joins(:participants).order('participants.priority asc').where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
+    @tasks = Task.joins(:participants).
+                  order('participants.priority asc').
+                  where(participants:{status:'confirmed',user_id:current_user.id},completed:true)
   end
 
   def task_requests
@@ -55,13 +62,12 @@ class TasksController < ApplicationController
   end
 
   def task_completion
-    #@task = Task.find(params[:id])
     if @task.completed == false
       @task.completed = true
       @task.comments.create(user_name: current_user.name, comment:'Status changed to Done')
     else
       @task.completed = false
-      @task.comments.create(user_name: current_user.name, comment:'Status changed to UnDone')
+      @task.comments.create(user_name: current_user.name, comment:'Status changed to UnDone',commenter:current_user.id)
     end
     if @task.save
       respond_with(@task) do |format|
@@ -76,15 +82,14 @@ class TasksController < ApplicationController
   def add_participants
     @users = User.all
     @participant = Participant.new
-    #@task = Task.find(params[:id])
   end
 
   def task_up
      @participant = current_user.participants.find_by_task_id(params[:id])
-     #@participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
      priority = @participant.priority
      @other_participant = current_user.participants.where("priority < ?",priority).last
      other_priority = @other_participant.priority
+     ## swaps priority of two participants
      @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
      @participant.save!
      @other_participant.save!
@@ -92,7 +97,6 @@ class TasksController < ApplicationController
 
   def task_down
     @participant = current_user.participants.find_by_task_id(params[:id])
-    #@participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
     priority = @participant.priority
     @other_participant = current_user.participants.where("priority > ?",priority).first
     other_priority = @other_participant.priority

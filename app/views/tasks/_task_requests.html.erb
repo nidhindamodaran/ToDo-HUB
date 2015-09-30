@@ -5,8 +5,7 @@
              <div class="panel-body">
                 <div class = "col-sm-12">
                   <div class = "col-sm-8">
-                    <% puts participant.task.inspect %>
-                      <%= link_to participant.task.title, task_path(participant.task) %> is shared with you.
+                      <strong><%= participant.task.title %></strong> is shared with you.
                   </div>
                   <div class = "col-sm-4">
                     <div class = "col-sm-6">

@@ -21,19 +21,21 @@ class ParticipantsController < ApplicationController
 
   def accept_request
     @participant = current_user.participants.find(params[:id])
-    #@participant = Participant.find(params[:id])
     @participant.status = 'confirmed'
     @participant.save
   end
   def set_progression
-    @participant = current_user.tasks.find_by_task_id(params[:id])
-    #@participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+    @participant = current_user.participants.find_by_task_id(params[:id])
+    old_progress = @participant.progression
     @participant.progression = params[:progress].to_i
-    @participant.save
+    if @participant.save
+      @task = Task.find(params[:id])
+      @task.comments.create(user_name: current_user.name, comment:"#{current_user.name} updated his progress from #{old_progress} to #{params[:progress]}", commenter:current_user.id)
+    end
+    @total_completion = Participant.find_total_progression(params[:id])
   end
   def destroy
     @participant = current_user.participants.find(params[:id])
-    #@participant = Participant.find(params[:id])
     @participant.destroy
   end
 

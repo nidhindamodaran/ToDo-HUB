@@ -99,24 +99,21 @@ var Count=0;
     animate: "fast",
     value: '<%= @participant.progression.to_i %>',
     change: function( event, ui ) {
-    var id=parseInt($("#task_id").html());
     var progress=$(this).slider("value");
+    var id = '<%=@task.id%>'
     $("#completion_perc").html(progress+"%");
     Count++;
     setTimeout(function(){
       Count--;
       if(Count<=0) {
         $.ajax({
-        url: '/participants/<%= @task.id %>/set_progression',
-        type: "GET",
-          data: { progress:progress },
-          success: function(result) {
-            $('#total_completion_perc').html('<%= @participant.progression.to_i %>%')
-            IsWaiting=false;
-          }
+        url: '/participants/set_progression',
+        type: "POST",
+        dataType: "JSON",
+        data: {id:id ,progress:progress }
         });
       }
-    }, 5000);
+    }, 500);
 
     }
 
