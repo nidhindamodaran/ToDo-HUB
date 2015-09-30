@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants]
   respond_to :html, :js
   def index
     @task = Task.new
@@ -24,18 +25,17 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
     @task.destroy
   end
 
   def confirm_delete
-    @task = Task.find(params[:id])
-    @participant = Participant.find_by_task_id(params[:id])
-    render 'confirm_delete'
+    #@task = Task.find(params[:id])
+    @participant = current_user.participants.find_by_task_id(@task.id)
   end
   def show
     @users = User.all
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
     @creator = User.find(@task.user_id)
     @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
     @participants = Participant.where(task_id:params[:id])
@@ -55,7 +55,7 @@ class TasksController < ApplicationController
   end
 
   def task_completion
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
     if @task.completed == false
       @task.completed = true
       @task.comments.create(user_name: current_user.name, comment:'Status changed to Done')
@@ -76,11 +76,12 @@ class TasksController < ApplicationController
   def add_participants
     @users = User.all
     @participant = Participant.new
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
   end
 
   def task_up
-     @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+     @participant = current_user.participants.find_by_task_id(params[:id])
+     #@participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
      priority = @participant.priority
      @other_participant = current_user.participants.where("priority < ?",priority).last
      other_priority = @other_participant.priority
@@ -90,7 +91,8 @@ class TasksController < ApplicationController
   end
 
   def task_down
-    @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+    @participant = current_user.participants.find_by_task_id(params[:id])
+    #@participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
     priority = @participant.priority
     @other_participant = current_user.participants.where("priority > ?",priority).first
     other_priority = @other_participant.priority
@@ -101,6 +103,11 @@ class TasksController < ApplicationController
 
 
   private
+
+  def find_task
+    @task = Task.find(params[:id])
+  end
+
   def task_params
     params.require(:task).permit(:title, :description)
   end

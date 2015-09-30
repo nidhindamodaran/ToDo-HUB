@@ -1,1 +1,3 @@
-$('#request_display_panel_<%= @participant.id %>').hide();
+$('#request_display_panel_<%= @participant.id %>').fadeOut();
+$('#task_display_panel_<%= @participant.task_id %>').fadeOut();
+$('#confirm_delete_<%= @participant.task_id %>').hide();
