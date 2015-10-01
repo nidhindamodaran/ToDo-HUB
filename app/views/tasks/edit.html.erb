@@ -1,4 +1,7 @@
 <div class = "jumbotron">
+  <center>
+    <h3>Update Task</h3>
+  </center>
   <%= form_for @task do |f|%>
     <%=  f.text_field :title, class:'form-control', autofocus:true %>
     <%=  f.text_area :description, class:'form-control', autofocus:true, placeholder:"Enter Description here" %>

@@ -58,7 +58,7 @@ label{
 }
 a{
 	text-decoration: none;
-	color:#34495e;
+	color:#337ab7 !important;
 }
 a:hover{
 	text-decoration: none;
@@ -415,9 +415,6 @@ background: rgb(255, 255, 255);
 }
 .task_delete_link{
   float:right;
-  width:50px;
-  height:20px;
-  margin-left: 20px;
 }
 .task_edit_link{
   width:50px;

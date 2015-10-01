@@ -1,5 +1,5 @@
-<div class="tab-pane active" id="tasks_lists">
-    <% if @tasks.count > 0 %>
+<div id = "completed_tasks_lists">
+  <% if @tasks.count > 0 %>
       <%= render @tasks %>
     <% else %>
       <div class="alert alert-danger">

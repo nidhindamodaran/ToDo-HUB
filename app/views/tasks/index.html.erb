@@ -17,7 +17,7 @@
 </div>
 <!-- This div is used for rendering results when clicking above tabs -->
   <div id="show_tabs" class = "span9">
-    <div class="tab-pane active" id="tasks_lists">
+    <div id="tasks_lists">
       <% if @tasks.count > 0 %>
         <%= render @tasks %>
       <% else %>
@@ -27,5 +27,5 @@
         </div>
       <% end %>
     </div>
-<%= will_paginate @tasks %>
   </div>
+<%= will_paginate @tasks %>

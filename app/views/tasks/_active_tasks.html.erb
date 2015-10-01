@@ -1,11 +1,11 @@
-<div class="tab-pane active" id="tasks_lists">
+<div id = "tasks_lists">
   <% if @tasks.count > 0 %>
-    <%= render @tasks %>
-  <% else %>
-    <div class="alert alert-danger">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Sorry!</strong> You dont have any active tasks.
-    </div>
-  <% end %>
+      <%= render @tasks %>
+    <% else %>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong> You dont have any active tasks.
+      </div>
+    <% end %>
 </div>
 <%= will_paginate @tasks %>
