@@ -436,3 +436,6 @@ a.close-modal {
   color:#34495e;
   font-weight: bold;
 }
+#tasks_lists > .panel.task:first-of-type div .task_menu_btn.up_button{  {
+  display: none;
+}

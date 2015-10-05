@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     @tasks = Task.joins(:participants).
                   order('participants.priority asc').
                   where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
-                  paginate(:page => params[:page], :per_page => 10)
+                  paginate(:page => params[:page], :per_page => 4)
   end
 
 
@@ -53,7 +53,7 @@ class TasksController < ApplicationController
     @tasks = Task.joins(:participants).
                   order('participants.priority asc').
                   where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
-                  paginate(:page => params[:page], :per_page => 10)
+                  paginate(:page => params[:page], :per_page => 8)
   end
   def completed_tasks
     @tasks = Task.joins(:participants).
