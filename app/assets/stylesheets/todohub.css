@@ -76,6 +76,7 @@ textarea.form-control {
  width:100% !important;
  height:100%;
 }
+
 input.new_task, input.new_task:hover, input.new_task:focus{
  font-family: 'Open Sans';
  border-style: none;
@@ -436,6 +437,7 @@ a.close-modal {
   color:#34495e;
   font-weight: bold;
 }
-#tasks_lists > .panel.task:first-of-type div .task_menu_btn.up_button{  {
+
+div#tasks_lists > .panel:first-child .task_buttons .up_button{
   display: none;
 }

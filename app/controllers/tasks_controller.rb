@@ -1,34 +1,38 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants, :edit, :update]
+  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants, :edit, :update, :task_up, :task_down]
   respond_to :html, :js
 
   def index
     @task = Task.new
     @tasks = Task.joins(:participants).
-                  order('participants.priority asc').
+                  order('participants.priority desc').
                   where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
-                  paginate(:page => params[:page], :per_page => 5)
+                  paginate(:page => params[:page], :per_page => 7)
   end
 
 
   def create
    @tasks = Task.joins(:participants).
-                 order('participants.priority asc').
+                 order('participants.priority desc').
                  where(participants:{status:'confirmed',user_id:current_user.id},completed:false)
    @task = current_user.tasks.new(task_params)
    @task.user_id = current_user.id
-   @task.save
-   #-- creating participant entry for task author
-   participations = Participant.where(user_id:current_user.id)
-   if participations.count > 0
-     last_priority = participations.last.priority.to_i
-     priority = last_priority + 1
-     @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:priority)
+
+   #-- creating participant entry for task author and marking  status as confirmed
+   if @task.save
+     participations = Participant.where(user_id:current_user.id)
+     if participations.count > 0
+       last_priority = participations.last.priority.to_i
+       priority = last_priority + 1
+       @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:priority)
+     else
+       @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:1)
+     end
+       @participant.save
    else
-     @participant = Participant.new(user_id:current_user.id, task_id:@task.id, status:'confirmed', priority:1)
+     flash.now[:notice] = "Task creation Unsuccessfull"
    end
-     @participant.save
   end
 
   def destroy
@@ -41,29 +45,31 @@ class TasksController < ApplicationController
   def confirm_delete
     @participant = current_user.participants.find_by_task_id(@task.id)
   end
+
   def show
     @users = User.all
     @creator = User.find(@task.user_id)
-    @participant = Participant.find_by_task_id_and_user_id(params[:id],current_user.id)
+    @participant = current_user.participants.find_by_task_id(params[:id])
     @participants = Participant.where(task_id:params[:id])
     @total_completion = Participant.find_total_progression(params[:id])
   end
 
   def active_tasks
     @tasks = Task.joins(:participants).
-                  order('participants.priority asc').
+                  order('participants.priority desc').
                   where(participants:{status:'confirmed',user_id:current_user.id},completed:false).
-                  paginate(:page => params[:page], :per_page => 5)
+                  paginate(:page => params[:page], :per_page => 7)
   end
+
   def completed_tasks
     @tasks = Task.joins(:participants).
-                  order('participants.priority asc').
+                  order('participants.priority desc').
                   where(participants:{status:'confirmed',user_id:current_user.id},completed:true).
-                  paginate(:page => params[:page], :per_page => 5)
+                  paginate(:page => params[:page], :per_page => 7)
   end
 
   def task_requests
-    @participants  = Participant.where(status: "pending", user_id:current_user.id).paginate(:page => params[:page], :per_page => 10)
+    @participants  = Participant.where(status: "pending", user_id:current_user.id)
     @tasks = Task.all
   end
 
@@ -80,9 +86,8 @@ class TasksController < ApplicationController
         format.html{redirect_to task_path(params[:id])}
       end
     else
-      render plain: "Error"
+      redirect_to task_path @task, flash: { error:"Task completion error" }
     end
-
   end
 
   def add_participants
@@ -93,7 +98,12 @@ class TasksController < ApplicationController
   def task_up
      @participant = current_user.participants.find_by_task_id(params[:id])
      priority = @participant.priority
-     @other_participant = current_user.participants.where("priority < ?",priority).last
+     #@other_participant = current_user.participants.where("priority > ?",priority).order('priority DESC').last
+     if @task.completed == true
+       @other_participant = current_user.participants.joins(:task).where("participants.priority > ? AND tasks.completed = ?",priority, true).order('priority DESC').last
+     else
+       @other_participant = current_user.participants.joins(:task).where("participants.priority > ? AND tasks.completed = ?",priority, false).order('priority DESC').last
+     end
      other_priority = @other_participant.priority
      ## swaps priority of two participants
      @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
@@ -104,7 +114,12 @@ class TasksController < ApplicationController
   def task_down
     @participant = current_user.participants.find_by_task_id(params[:id])
     priority = @participant.priority
-    @other_participant = current_user.participants.where("priority > ?",priority).first
+    #@other_participant = current_user.participants.where("priority < ?",priority).order('priority DESC').first
+    if @task.completed == true
+      @other_participant = current_user.participants.joins(:task).where("participants.priority < ? AND tasks.completed = ?",priority, true).order('priority DESC').first
+    else
+      @other_participant = current_user.participants.joins(:task).where("participants.priority < ? AND tasks.completed = ?",priority, false).order('priority DESC').first
+    end
     other_priority = @other_participant.priority
     @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority
     @participant.save!
@@ -129,5 +144,6 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :description)
   end
+
 
 end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_user, :except => :index
   respond_to :html, :js
+  
   def index
     @users = User.all
   end
@@ -13,8 +14,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(user_params)
-      redirect_to @user
+    if @user.update_attributes(user_params)
+      redirect_to @user, flash: { notice:"Updated succesfully" }
+    else
+      redirect_to @user, flash: { notice:"Updation not success" }
+    end
   end
 
   private

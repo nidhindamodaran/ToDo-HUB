@@ -1,5 +1,6 @@
+<!-- Comment Form -->
 <div class ="row">
-  <%= form_for ([@task, @task.comments.build]) do |f| %>
+  <%= form_for ([@task, @task.comments.build]), data:{remote:true} do |f| %>
       <%= f.text_field :comment, class: "new_comment", :placeholder => "Add the comment, Hit 'Enter' to post" %>
       <% f.submit :submit %></td>
   <% end %>

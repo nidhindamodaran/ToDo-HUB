@@ -1,6 +1,7 @@
 class ParticipantsController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :js
+
   def create
     @users_list = params[:check_user]
     @users_list.each do |user_id|
@@ -24,6 +25,7 @@ class ParticipantsController < ApplicationController
     @participant.status = 'confirmed'
     @participant.save
   end
+
   def set_progression
     @participant = current_user.participants.find_by_task_id(params[:id])
     old_progress = @participant.progression
@@ -34,6 +36,7 @@ class ParticipantsController < ApplicationController
     end
     @total_completion = Participant.find_total_progression(params[:id])
   end
+  
   def destroy
     @participant = current_user.participants.find(params[:id])
     @participant.destroy

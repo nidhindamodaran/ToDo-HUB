@@ -1,2 +1,2 @@
-$("#show_tabs").append("<%= escape_javascript(render(:partial => @task)) %>");
+$("#show_tabs").prepend("<%= escape_javascript(render(:partial => @task)) %>");
 $('.new_task').val('')

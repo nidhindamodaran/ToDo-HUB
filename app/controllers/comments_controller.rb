@@ -7,12 +7,10 @@ class CommentsController < ApplicationController
     @comment.commenter = current_user.id
     @comment.user_name = current_user.name
     @comment.save
-    redirect_to task_path(@task)
   end
   def destroy
     @comment = @task.comments.find(params[:id])
     @comment.destroy
-    redirect_to task_path(@task)
   end
 
   private
