@@ -165,8 +165,14 @@ input.new_task, input.new_task:hover, input.new_task:focus{
  height: 36px;
 }
 .comp_button.disabled{
-  background: url("iconsprite.png") -145px -108px;
+  background: url("iconsprite.png") -145px 0px;
+  opacity: 0.2;
 }
+.comp_button.completed.disabled{
+  background: url("iconsprite.png") -145px -71px;
+  opacity: 0.2;
+}
+
 .panel.task_add{
 	 margin-bottom: 100px;
 	 margin-top: 50px;

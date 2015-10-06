@@ -35,7 +35,11 @@
               </div>
         <% else %>
         <div class = "col-sm-3">
-         <div class = 'task_menu_btn comp_button disabled'> </div>
+          <% if task.completed == false %>
+             <div class = 'task_menu_btn comp_button disabled'></div>
+          <% else %>
+             <div class = 'task_menu_btn comp_button completed disabled'> </div>
+          <% end %>
         </div>
         <% end %>
 
