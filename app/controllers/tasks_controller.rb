@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_task, :only => [:destroy,:confirm_delete, :show, :task_completion, :add_participants, :edit, :update, :task_up, :task_down]
+  before_filter :find_task, :except => [:index, :create, :active_tasks, :completed_tasks, :task_requests]
   respond_to :html, :js
 
   def index
@@ -100,9 +100,13 @@ class TasksController < ApplicationController
      priority = @participant.priority
      #@other_participant = current_user.participants.where("priority > ?",priority).order('priority DESC').last
      if @task.completed == true
-       @other_participant = current_user.participants.joins(:task).where("participants.priority > ? AND tasks.completed = ?",priority, true).order('priority DESC').last
+       @other_participant = current_user.participants.joins(:task).
+                            where("participants.priority > ? AND tasks.completed = ?",priority, true).
+                            order('priority DESC').last
      else
-       @other_participant = current_user.participants.joins(:task).where("participants.priority > ? AND tasks.completed = ?",priority, false).order('priority DESC').last
+       @other_participant = current_user.participants.joins(:task).
+                            where("participants.priority > ? AND tasks.completed = ?",priority, false).
+                            order('priority DESC').last
      end
      other_priority = @other_participant.priority
      ## swaps priority of two participants
@@ -116,9 +120,13 @@ class TasksController < ApplicationController
     priority = @participant.priority
     #@other_participant = current_user.participants.where("priority < ?",priority).order('priority DESC').first
     if @task.completed == true
-      @other_participant = current_user.participants.joins(:task).where("participants.priority < ? AND tasks.completed = ?",priority, true).order('priority DESC').first
+      @other_participant = current_user.participants.joins(:task).
+                           where("participants.priority < ? AND tasks.completed = ?",priority, true).
+                           order('priority DESC').first
     else
-      @other_participant = current_user.participants.joins(:task).where("participants.priority < ? AND tasks.completed = ?",priority, false).order('priority DESC').first
+      @other_participant = current_user.participants.joins(:task).
+                           where("participants.priority < ? AND tasks.completed = ?",priority, false).
+                           order('priority DESC').first
     end
     other_priority = @other_participant.priority
     @participant.priority, @other_participant.priority = @other_participant.priority, @participant.priority

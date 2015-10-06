@@ -25,14 +25,20 @@
         <div class = "col-sm-3">
           <%= link_to ("<div class = 'delete_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
         </div>
-
+        <% if task.user_id == current_user.id %>
+              <div class = "col-sm-3">
+                <% if task.completed == false %>
+                  <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+                <% else %>
+                  <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+                <% end %>
+              </div>
+        <% else %>
         <div class = "col-sm-3">
-          <% if task.completed == false %>
-            <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
-          <% else %>
-            <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
-          <% end %>
+         <div class = 'task_menu_btn comp_button disabled'> </div>
         </div>
+        <% end %>
+
       </div>
     </div>
   </div>
