@@ -450,3 +450,6 @@ a.close-modal {
 div#tasks_lists > .panel:first-child .task_buttons .up_button{
   display: none;
 }
+div#tasks_lists > .panel:nth-last-child(2) .task_buttons .down_button{
+  display: none;
+}
