@@ -300,7 +300,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
   font-size: 12px;
   color:#999999;
   margin-top: 20px;
-  word-break: break-all;
+  word-break: keep-all;
 }
 .edit_profile_link, .edit_profile_link > a{
   text-decoration: underline;
