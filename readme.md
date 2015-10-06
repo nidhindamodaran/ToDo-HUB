@@ -9,3 +9,7 @@ Simple todo app using rails 4
 * rake db:migrate
 * bundle install
 * rails s
+
+#Check Out
+
+You can find [here](https://todohub.herokuapp.com) the working model of ToDoHUB
