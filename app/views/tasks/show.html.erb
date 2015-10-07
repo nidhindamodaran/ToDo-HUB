@@ -9,7 +9,7 @@
       </div>
       <div class = "col-sm-12">
         <div class = "task_author">
-          Created by <b><%= link_to @creator.name, user_path(@creator.id) %></b>
+          Created by <b><%= link_to creator(@task).name, user_path(creator(@task).id) %></b>
         </div>
         <div class= "task_date">
           <%= time_ago_in_words(@task.created_at) %>
@@ -37,7 +37,7 @@
             <div class = "col-sm-10">
               <div id = "total_progress", class="progress">
                 <div class="progress-bar progress-bar-info" style="width: <%= @total_completion %>%;"></div>
-                <span id="total_completion_perc"><%= @total_completion.to_i %>%</span>
+                <span id="total_completion_perc"><%= total_completion(@task) %>%</span>
               </div>
             </div>
             <div class ='col-sm-2'>

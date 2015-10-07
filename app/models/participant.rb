@@ -11,4 +11,10 @@ class Participant < ActiveRecord::Base
     end
     avg_progression = total/count
   end
+
+  def self.swap(first, second)
+    first.priority, second.priority = second.priority, first.priority
+    first.save!
+    second.save!
+  end
 end

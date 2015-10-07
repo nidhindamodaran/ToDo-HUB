@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment.user_name = current_user.name
     @comment.save
   end
+  
   def destroy
     @comment = @task.comments.find(params[:id])
     @comment.destroy

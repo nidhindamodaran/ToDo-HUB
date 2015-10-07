@@ -3,7 +3,12 @@
   <ul class="col-sm-12 list-group users">
     <% @users.each do |user| %>
       <% unless user.id == current_user.id %>
-        <li class="list-group-item user"><span class="badge"><%= user.tasks.count%></span><%= link_to user.name, user_path(user.id) %></li>
+
+        <li class="list-group-item user">
+          <span class = "dp"><%= image_tag user.avatar.url(:thumb), class: "img-circle" %></span>&nbsp;
+          <span class="badge"><%= user.tasks.count%></span>
+          <%= link_to user.name, user_path(user.id) %>
+        </li>
       <% end %>
     <% end %>
   </ul>
