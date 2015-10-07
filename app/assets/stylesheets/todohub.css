@@ -103,7 +103,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
  height:auto;
  word-break: break-all;
  font-size: 16px;
- color:#34495e;
+ color:#34495e !important;
 }
 .task_date{
  color:#999999;
@@ -215,7 +215,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
    border: 0;
 }
 .navbar-brand{
- color:#524A8C;
+ color:#524A8C !important;
  font-size: 20px;
  font-weight: bold;
 }
