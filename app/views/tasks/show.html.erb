@@ -3,7 +3,7 @@
     <div class="col-sm-8">
       <div class = "col-sm-12">
         <div class= "task_title">
-          <%= @task.title %>
+          <%= link_extract(@task.title).html_safe %>
         </div>
 
       </div>
@@ -82,7 +82,7 @@
 
     </div>
     <div class = "col-sm-12 task_desc">
-      <span class = "task_desc_head"> Description: </span><%= @task.description if @task.description.present?%>
+      <span class = "task_desc_head"> Description: </span><%= link_extract(@task.description).html_safe if @task.description.present?%>
     </div>
   </div>
 </div>
