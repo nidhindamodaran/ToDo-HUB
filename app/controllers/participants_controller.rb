@@ -31,15 +31,7 @@ class ParticipantsController < ApplicationController
 
   def set_progression
     @participant = current_user.participants.find_by_task_id(params[:id])
-    old_progress = @participant.progression
-    @participant.progression = params[:progress].to_i
-
-    if @participant.save
-      @task = Task.find(params[:id])
-      @task.comments.create(user_name: current_user.name, comment:"#{current_user.name} updated his progress from #{old_progress} to #{params[:progress]}", commenter:current_user.id)
-    end
-    
-    @total_completion = Participant.find_total_progression(params[:id])
+    @participant.update_attributes(progression:params[:progress].to_i)
   end
 
   def destroy

@@ -1,20 +1,16 @@
 class Participant < ActiveRecord::Base
+
   belongs_to :user
   belongs_to :task
 
-  def self.find_total_progression(task_id)
-    participants = Participant.where(task_id:task_id)
-    total = 0;
-    count = participants.count
-    participants.each do |participant|
-      total += participant.progression
-    end
-    avg_progression = total/count
-  end
+  after_update :create_comment
+  private
 
-  def self.swap(first, second)
-    first.priority, second.priority = second.priority, first.priority
-    first.save!
-    second.save!
+  def create_comment
+    if self.progression_changed?
+      task = Task.find(self.task_id)
+      user = User.find(self.user_id)
+      task.comments.create(user_name: user.name, comment:"#{user.name} updated his progress from #{self.progression_was} to #{self.progression}", commenter:user.id)
+    end
   end
 end

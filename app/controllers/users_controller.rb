@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
   def show
+    flash.now[:notice] = "Your profile is not complete ! Complete now" unless @user.avatar_file_size.present?
     @tasks = Task.where(user_id:params[:id])
   end
 

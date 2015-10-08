@@ -1,4 +1,10 @@
 <!-- Task Index Page -->
+<% if @task.errors.present? %>
+<div class="alert alert-success", id="error_box">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <div  id = "error_notify"></div>
+</div>
+<% end %>
     <%= form_for @task, remote:true do |f| %>
       <div class = 'input-group task'>
         <span class="input-group-addon">
@@ -10,9 +16,9 @@
     <% end %>
 <div id="indextab">
   <ul class="nav nav-tabs nav-justified">
-    <li><%= link_to "Active Tasks", active_tasks_path, :remote => true, :data => {:toggle=>"tab"} %></li>
-    <li><%= link_to "Completed Tasks", completed_tasks_path, :remote => true, :data => {:toggle=>"tab"} %></li>
-    <li><%= link_to "Task Requests", requests_tasks_path, :remote => true, :data => {:toggle=>"tab"} %></li>
+    <li><%= link_to "Active Tasks", active_tasks_path, remote: true, data: {toggle:"tab"} %></li>
+    <li><%= link_to "Completed Tasks", completed_tasks_path, remote: true, data: {toggle:"tab"} %></li>
+    <li><%= link_to "Task Requests", requests_tasks_path, remote: true, data: {toggle:"tab"} %></li>
   </ul>
 </div>
 <!-- This div is used for rendering results when clicking above tabs -->

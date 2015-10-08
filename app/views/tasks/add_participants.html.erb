@@ -1,3 +1,4 @@
+<h4>Add friends to the Task</h4>
 <%= form_tag @participant do %>
   <% @users.each do |user| %>
     <div id="participant_list_<%= user.id %>">
@@ -8,7 +9,7 @@
       <% end %>
     </div>
   <% end %>
-  <%= button_tag :Save, {class: "share_link button", value: "Sent Request"}%>
+  <%= button_tag :Save, {class: "share_link button pull-right", value: "Sent Request"}%>
 <% end %>
 
 

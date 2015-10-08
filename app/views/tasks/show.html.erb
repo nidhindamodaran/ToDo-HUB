@@ -35,16 +35,16 @@
               Overall Task Completion
             </div>
             <div class = "col-sm-10">
-              <div id = "total_progress", class="progress">
-                <div class="progress-bar progress-bar-info" style="width: <%= @total_completion %>%;"></div>
                 <span id="total_completion_perc"><%= total_completion(@task) %>%</span>
+                <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= total_completion(@task) %>%"></div>
               </div>
             </div>
             <div class ='col-sm-2'>
                   <% if @task.completed == false %>
-                    <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+                    <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, task_completion_task_path(id:@task.id, status:true) %>
                   <% else %>
-                    <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: @task.id  %>
+                    <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, task_completion_task_path(@task.id, status:false) %>
                   <% end %>
             </div>
           </div>
@@ -66,7 +66,7 @@
       <div id = "users_list">
         <!-- for listing users -->
 
-        <% unless (@participants.count == @users.count)||(@task.user_id!= current_user.id) %>
+        <% unless (@task.participants.count == @users.count)||(@task.user_id!= current_user.id) %>
           <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
         <% end %>
       </div>
@@ -76,7 +76,7 @@
         <strong>Shared With :</strong>
         <% @task.participants.each do |participant| %>
           <% if participant.status == 'confirmed' %>
-            <%= link_to participant.user.name, user_path(participant.user) %>,
+            <%= link_to participant.user.name, user_path(participant.user) %><% unless participant == @task.participants.last %> , <% end %>
           <% end %>
         <% end %>
 

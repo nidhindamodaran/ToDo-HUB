@@ -10,7 +10,7 @@
                   </div>
                   <div class = "col-sm-4">
                     <div class = "col-sm-6">
-                      <%= link_to ("<div class = 'share_link accept_request'>Accept</div>").html_safe, controller: 'participants', action:"accept_request", id:participant.id, remote:true %>
+                      <%= link_to ("<div class = 'share_link accept_request'>Accept</div>").html_safe, accept_request_participant_path(participant.id), remote:true %>
                     </div>
                     <div class = "col-sm-6">
                       <%= link_to ("<div class = 'share_link decline_request'>Decline</div>").html_safe, participant_path(participant.id), method: :delete, remote:true %>

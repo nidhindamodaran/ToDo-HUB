@@ -1,12 +1,12 @@
 <% if params[:page].present?  %>
   <%# puts params %>
-  $('#tasks_lists').append('<%= escape_javascript render(@tasks) %>');
+  $('#tasks_lists').append('<%= j render(@tasks) %>');
   <% if @tasks.next_page %>
-    $('.pagination').replaceWith('<%= escape_javascript will_paginate(@tasks) %>');
+    $('.pagination').replaceWith('<%= j will_paginate(@tasks) %>');
   <%else %>
     $('.pagination').remove();
   <%end%>
 <% else %>
   <%# puts params %>
-  $("#show_tabs").html("<%= escape_javascript(render(:partial => 'completed_tasks')) %>");
+  $("#show_tabs").html("<%= j(render(:partial => 'completed_tasks')) %>");
 <% end %>

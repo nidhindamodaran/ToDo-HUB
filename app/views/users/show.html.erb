@@ -9,11 +9,11 @@
           <%= @user.name %>
         </div>
         <div class ="col-sm-12 user_show_details">
-          <span class = "label label-success"><u><%= @tasks.count%></u> Own Tasks</span>
-          <span class = "label label-warning"><u><%= @user.tasks.count %></u> Working Tasks</span>
+          <span class = "label label-success"><u><%= number_to_human(@tasks.count)%></u> Own Tasks</span>
+          <span class = "label label-warning"><u><%= number_to_human(@user.tasks.count) %></u> Working Tasks</span>
         </div>
         <div class = "col-sm-12 user_show_description">
-          <%= @user.about %>
+          <%= link_extract(@user.about).html_safe %>
         </div>
       </div>
     </div>

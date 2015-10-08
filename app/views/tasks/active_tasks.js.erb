@@ -1,11 +1,10 @@
-// checking for pagination //
 <% if params[:page].present?  %>
-  $('#tasks_lists').append('<%= escape_javascript render(@tasks) %>');
+  $('#tasks_lists').append('<%= j render(@tasks) %>');
   <% if @tasks.next_page %>
-    $('.pagination').replaceWith('<%= escape_javascript will_paginate(@tasks) %>');
+    $('.pagination').replaceWith('<%= j will_paginate(@tasks) %>');
   <%else %>
     $('.pagination').remove();
   <%end%>
 <% else %>
-  $("#show_tabs").html("<%= escape_javascript(render(:partial => 'active_tasks')) %>");
+  $("#show_tabs").html("<%= j(render(partial:'active_tasks')) %>");
 <% end %>

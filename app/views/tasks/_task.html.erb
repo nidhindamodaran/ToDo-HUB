@@ -17,20 +17,20 @@
     <div class ="col-sm-4">
       <div class = "task_buttons">
         <div class = "col-sm-3">
-            <%= link_to ("<div class = 'task_menu_btn up_button'> </div>").html_safe, controller: "tasks", action: "task_up", id: task.id , remote: true %>
+            <%= link_to ("<div class = 'task_menu_btn up_button'> </div>").html_safe, task_up_task_path(task.id), remote: true %>
         </div>
         <div class = "col-sm-3">
-          <%= link_to ("<div class = 'task_menu_btn down_button'> </div>").html_safe, controller: "tasks", action: "task_down", id: task.id , remote: true %>
+          <%= link_to ("<div class = 'task_menu_btn down_button'> </div>").html_safe, task_down_task_path(task.id), remote: true %>
         </div>
         <div class = "col-sm-3">
-          <%= link_to ("<div class = 'delete_button'> </div>").html_safe, controller: "tasks", action: "confirm_delete", id: task.id , remote: true %>
+          <%= link_to ("<div class = 'delete_button'> </div>").html_safe, confirm_delete_task_path(task.id), remote: true %>
         </div>
         <% if task.user_id == current_user.id %>
               <div class = "col-sm-3">
                 <% if task.completed == false %>
-                  <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+                  <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, task_completion_task_path(id:task.id,status:true) , remote: true %>
                 <% else %>
-                  <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, controller: "tasks", action: "task_completion", id: task.id , remote: true %>
+                  <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, task_completion_task_path(id:task.id,status:false), remote: true %>
                 <% end %>
               </div>
         <% else %>

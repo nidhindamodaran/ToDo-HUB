@@ -1,2 +1,9 @@
-$("#show_tabs").prepend("<%= escape_javascript(render(:partial => @task)) %>");
-$('.new_task').val('')
+<% if @save_flag %>
+  $("#show_tabs").prepend("<%= j(render(:partial => @task)) %>");
+  $('.new_task').val('');
+<% else %>
+  alert("Not success");
+  $('#error_box').show();
+  $('#error_box').slideDown();
+  $('#error_notify').html("<%= j flash[:success]= 'Error'%>")
+<% end %>

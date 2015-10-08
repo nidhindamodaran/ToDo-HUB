@@ -6,7 +6,7 @@
 
         <li class="list-group-item user">
           <span class = "dp"><%= image_tag user.avatar.url(:thumb), class: "img-circle" %></span>&nbsp;
-          <span class="badge"><%= user.tasks.count%></span>
+          <span class="badge"><%= number_to_human(user.tasks.count)%></span>
           <%= link_to user.name, user_path(user.id) %>
         </li>
       <% end %>
