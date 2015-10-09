@@ -1,10 +1,7 @@
 <!-- Task Index Page -->
-<% if @task.errors.present? %>
-<div class="alert alert-success", id="error_box">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <div  id = "error_notify"></div>
+<div id = "error_box" style="display:none;">
 </div>
-<% end %>
+
     <%= form_for @task, remote:true do |f| %>
       <div class = 'input-group task'>
         <span class="input-group-addon">
