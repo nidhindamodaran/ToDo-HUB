@@ -10,6 +10,11 @@
       <div class = "col-sm-12">
         <div class = "task_author">
           Created by <b><%= link_to creator(@task).name, user_path(creator(@task).id) %></b>
+          <span>
+            <% if creator(@task) == current_user %>
+              (You)
+            <% end %>
+          </span>
         </div>
         <div class= "task_date">
           <%= time_ago_in_words(@task.created_at) %>

@@ -1,3 +1,2 @@
 //Chnages progression //
-$("#total_completion_perc").html(<%= @total_completion.to_i %>%)
-$('.progress-bar').css('width',<%= @total_completion.to_i %> +'%').attr('aria-valuenow', <%= @total_completion.to_i %>);
+$('.col-sm-12.overall_progress').html("<%= escape_javascript(render partial: 'overall_progress') %>");
