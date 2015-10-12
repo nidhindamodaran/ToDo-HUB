@@ -7,7 +7,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
   def show
-    flash.now[:notice] = "Your profile is not complete ! Complete now" unless @user.avatar_file_size.present?
+    if current_user == @user
+      flash.now[:notice] = "Your profile is not complete ! Complete now" unless @user.avatar_file_size.present?
+    end
     @tasks = Task.where(user_id:params[:id])
   end
 
@@ -20,6 +22,11 @@ class UsersController < ApplicationController
     else
       redirect_to @user, flash: { notice:"Updation not success" }
     end
+  end
+
+  def destroy
+    current_user.destroy
+    redirect_to root_path
   end
 
   private

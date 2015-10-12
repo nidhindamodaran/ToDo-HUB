@@ -37,6 +37,11 @@ class ParticipantsController < ApplicationController
   def destroy
     @participant = current_user.participants.find(params[:id])
     @participant.destroy
+    if @participant.task.completed == true
+      @tasks = Task.completed(current_user).paginate(page: params[:page], per_page: 10)
+    else
+      @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
+    end
   end
 
   private

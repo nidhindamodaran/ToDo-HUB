@@ -1,3 +1,6 @@
 $('#request_display_panel_<%= @participant.id %>').fadeOut();
 $('#task_display_panel_<%= @participant.task_id %>').fadeOut();
 $('#confirm_delete_<%= @participant.task_id %>').hide();
+setTimeout(function(){
+$("#tasks_lists").html("<%= j(render(partial:@tasks)) %>");
+}, 500);

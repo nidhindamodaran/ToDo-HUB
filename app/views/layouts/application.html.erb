@@ -36,6 +36,7 @@
             <li class="divider"></li>
             <li class="dropdown-header">Account</li>
             <li><%= link_to "Logout", destroy_user_session_path , method: :delete %></li>
+            <li><%= link_to "Delete Account", user_path(current_user.id) , method: :delete %></li>
           </ul>
         </div>
       </li>

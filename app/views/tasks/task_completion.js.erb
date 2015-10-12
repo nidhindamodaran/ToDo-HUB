@@ -1,1 +1,4 @@
 $('#task_display_panel_<%= params[:id] %>').fadeOut();
+setTimeout(function(){
+$("#tasks_lists").html("<%= j(render(partial:@tasks)) %>");
+}, 500);

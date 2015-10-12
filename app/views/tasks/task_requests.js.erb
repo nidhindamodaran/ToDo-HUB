@@ -1,1 +1,1 @@
-$("#show_tabs").html("<%= j(render(:partial => 'task_requests')) %>");
+$("#show_tabs").html("<%= escape_javascript(render partial: 'task_requests') %>");

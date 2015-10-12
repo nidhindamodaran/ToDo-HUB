@@ -1,7 +1,12 @@
 <% if @save_flag %>
-  $("#show_tabs").prepend("<%= j(render(:partial => @task)) %>");
+  $("#show_tabs").html("<%= j(render(partial:'active_tasks')) %>");
+  //$("#show_tabs").html("<%= j(render(:partial => @task)) %>");
   $('.new_task').val('');
+  //$("#tasks_lists .panel:first-child div:nth-child(4)").hide();
 <% else %>
   $('#error_box').html("<%= j (render 'error_dialog') %>");
-  $('#error_box').effect("shake");
+  $('#error_box').fadeIn();
+  setTimeout(function(){
+  $('#error_box').fadeOut();
+}, 2000);
 <% end %>
