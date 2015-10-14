@@ -12,6 +12,7 @@ class TasksController < ApplicationController
   def show
     @users = User.all
     @participant = current_user.participants.find_by_task_id(params[:id])
+    @comments = @task.comments.paginate(page: params[:page], per_page: 10)
   end
 
   def edit

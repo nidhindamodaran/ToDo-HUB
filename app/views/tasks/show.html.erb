@@ -97,8 +97,9 @@
 
 <div class = 'comments_panel'>
   <ul class="list-group", id="comments_listing">
-    <%= render @task.comments.reverse %>
+    <%= render @comments %>
   </ul>
+  <%= will_paginate @comments %>
   <%= render 'comments/form' %>
 </div>
 <span id= "task_id", display:none>
