@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+
   def show
     if current_user == @user
       flash.now[:notice] = "Your profile is not complete ! Complete now" unless @user.avatar_file_size.present?

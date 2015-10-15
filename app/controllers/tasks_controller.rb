@@ -15,10 +15,6 @@ class TasksController < ApplicationController
     @comments = @task.comments.paginate(page: params[:page], per_page: 10)
   end
 
-  def edit
-    @task = Task.find_by_id_and_user_id(params[:id], current_user.id)
-  end
-
   def create
    @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
    @task = current_user.tasks.new(task_params)

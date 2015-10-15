@@ -1,12 +1,12 @@
 class Task < ActiveRecord::Base
    scope :completed, ->(user) {
-     joins(:participants).
+     includes(:participants).
      order('participants.priority desc').
      where(participants:{status:'confirmed',user_id:user.id},completed:true)
     }
 
     scope :active, ->(user) {
-      joins(:participants).
+      includes(:participants).
       order('participants.priority desc').
       where(participants:{status:'confirmed',user_id:user.id},completed:false)
      }

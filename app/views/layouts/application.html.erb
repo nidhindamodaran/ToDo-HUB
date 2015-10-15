@@ -13,16 +13,11 @@
 <body>
 
   <div class = "container">
-    <div class="row">
-      <div class = "col-sm-12">
-        <%= link_to ('<div class = "logo"></div>').html_safe, root_path %>
-      </div>
-    </div>
     <% if current_user %>
     <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to "Check", tasks_path , class:"navbar-brand" %>
+          <%= link_to ('<div class = "logo head"></div>').html_safe, root_path %>
       </div>
     <ul class="nav navbar-nav navbar-right">
       <li>
@@ -32,11 +27,10 @@
             <li class="dropdown-header"><%= current_user.email %></li>
             <li><%= link_to "Show Profile", user_path(current_user) %></li>
             <li><%= link_to "Users List", users_path%></li>
-            <li><%= link_to "Tasks List", tasks_path%></li>
             <li class="divider"></li>
             <li class="dropdown-header">Account</li>
             <li><%= link_to "Logout", destroy_user_session_path , method: :delete %></li>
-            <li><%= link_to "Delete Account", user_path(current_user.id) , method: :delete %></li>
+            <li><%= link_to "Delete Account", user_path(current_user.id) ,data: {confirm: "Are you sure?"}, method: :delete %></li>
           </ul>
         </div>
       </li>

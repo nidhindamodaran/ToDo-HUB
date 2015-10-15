@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :html, :js
+  respond_to :html, :json
 
   def create
     if params[:check_user].present?
@@ -37,6 +37,8 @@ class ParticipantsController < ApplicationController
   def set_progression
     @participant = current_user.participants.find_by_task_id(params[:id])
     @participant.update_attributes(progression:params[:progress].to_i)
+    @task = @participant.task
+    render 'set_progression'
   end
 
   def destroy

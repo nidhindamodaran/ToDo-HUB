@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928072713) do
+ActiveRecord::Schema.define(version: 20151014051623) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "commenter",  limit: 4
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20150928072713) do
     t.string   "status",      limit: 255, default: "pending"
     t.integer  "progression", limit: 4,   default: 0
   end
+
+  add_index "participants", ["task_id"], name: "index_participants_on_task_id", using: :btree
+  add_index "participants", ["task_id"], name: "task_id", using: :btree
+  add_index "participants", ["user_id"], name: "index_participants_on_user_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title",       limit: 255

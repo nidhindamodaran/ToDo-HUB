@@ -1,6 +1,6 @@
 <li class="list-group-item comment row", id = "comment_panel_<%= comment.id %>">
-  <div class = "col-sm-12">
-    <div class = "col-sm-10">
+  <div class = "col-sm-12 comment_board">
+    <div class = "col-sm-10 comment_display">
       <%= link_extract(comment.comment).html_safe %>
         <div class = "comment_details">
           <div class = "commenter_name">
@@ -11,7 +11,7 @@
           </div>
         </div>
     </div>
-    <div class = "col-sm-2">
+    <div class = "col-sm-1 pull-right">
       <% if comment.commenter == current_user.id %>
         <%= link_to ("<div class = 'delete_button'> </div>").html_safe, [comment.task,comment], method: :delete, remote: true %>
       <% end %>

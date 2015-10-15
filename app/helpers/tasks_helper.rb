@@ -13,7 +13,7 @@ module TasksHelper
   end
 
   def link_extract(text)
-    linked = text.gsub( %r{http://[^\s<]+} ) do |url|
+    linked = text.gsub( %r{http[s]?://[^\s<]+} ) do |url|
       if url[/(?:png|jpe?g|gif|svg)$/]
         "<img src='#{url}' />"
       else
