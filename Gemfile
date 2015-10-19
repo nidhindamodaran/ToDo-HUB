@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 
-
 gem 'mysql2'
 
 # Use SCSS for stylesheets
@@ -34,6 +33,8 @@ gem 'jquery-ui-rails'
 gem 'jquery-modal-rails'
 # gem for uploading profile picture
 gem 'paperclip'
+gem 'rails4-autocomplete'
+gem 'gon'
 #gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 
 # Use ActiveModel has_secure_password

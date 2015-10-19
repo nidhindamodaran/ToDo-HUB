@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
     collection do
       post :set_progression
+      get :autocomplete_user_name
+      get :check_existence
     end
 
   end

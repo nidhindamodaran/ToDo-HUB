@@ -68,7 +68,9 @@ class TasksController < ApplicationController
   def add_participants
     @users = User.all
     @participant = Participant.new
+    @participants = Participant.where(task_id: @task.id)
   end
+  
   def task_up
     @participant, @other_participant = @task.swap_tasks(current_user,"task_up")
   end

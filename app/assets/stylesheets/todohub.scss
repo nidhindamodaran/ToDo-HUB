@@ -305,7 +305,8 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     text-align: center;
 }
 .modal{
-    height:75%;
+    height:50%;
+    width:40% !important;
     padding:10px;
     overflow:scroll;
     position: relative;
@@ -602,4 +603,46 @@ padding-bottom: 40px !important;
 }
 #users_list{
   width: 116px;
+}
+#tag_box{
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  margin-bottom: 50px;
+}
+
+.tag{
+  color:black !important;
+  background-color: #00BB9B !important;
+}
+.bootstrap-tagsinput{
+  min-width: 100% !important;
+  border-radius: 0px !important;
+  margin-bottom: 50px !important;
+}
+.share_link.save{
+  margin-left: 0px !important;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+#user_modal .col-sm-12{
+  margin-left: 0 !important;
+}
+.panel.task{
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
 }

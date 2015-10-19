@@ -1,18 +1,53 @@
-<h4>Add friends to the Task</h4>
+<h4>Share Task</h4>
 <hr />
-<%= form_tag @participant do %>
-  <% @users.each do |user| %>
-    <div id="participant_list_<%= user.id %>">
-      <% unless user.tasks.include? @task %>
-        <%= check_box_tag 'check_user[]',user.id %>
-        <%= h user.name %>
-        <%= hidden_field_tag :task_id, @task.id.to_i %>
-      <% end %>
-    </div>
+<div id = "user_modal">
+  <%= autocomplete_field_tag :search, params[:search], autocomplete_user_name_participants_path, {class: "search-query", id: "tag_box", placeholder: "Type user's name"} %>
+  Shared with:<br />
+  <input type="text" id = "tags">
+  <div class = "share_links">
+    <%= form_tag @participant do |f| %>
+      <%= hidden_field_tag :task_id, @task.id.to_i %>
+      <%= hidden_field_tag :user_list %>
+      <%= button_tag :Save, {class: 'share_link save pull-left'}%>
+    <% end %>
+    <%#= link_to_modal ("<div class = 'share_link save pull-left'>Save</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
+    <%= link_to ("<div class = 'delete_confirmation_cancel_button pull-left'><u>Cancel</u></div>").html_safe, task_path(@task.id),:rel => "modal:close" %>
+  </div>
+</div>
+
+<script>
+
+var elt = $('#tags');
+//elt.prop('disabled', true);
+elt.tagsinput({
+  tagClass: 'label label-primary',
+  itemValue: 'value',
+  itemText: 'text'
+});
+
+$( document ).ready(function() {
+  <% @participants.each do |participant| %>
+    elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>' });
   <% end %>
-  <%= button_tag :Save, {class: "share_link button pull-right", value: "Sent Request"}%>
-<% end %>
 
+  $('.search-query').bind('railsAutocomplete.select', function(event, data ){
+    if (data.item.id){
+      elt.tagsinput('add', { "value": data.item.id , "text": data.item.value });
+      $(this).val('');
+    }else{
+      $(this).val('');
+    }
+});
+});
+var $elt = elt.tagsinput('input');
+elt.on('beforeItemAdd', function(event) {
+  var exist_val = $('#user_list').val();
+  var push_val = event.item.value
+    if (exist_val){
+     $('#user_list').val(exist_val+','+push_val);
+    }else{
+     $('#user_list').val(push_val);
+    }
 
-    <!-- link for Modal close button -->
-<%#= link_to ("<div class = 'share_link cancel'>Cancel</div>").html_safe, users_path, :rel => "modal:close" %>
+});
+</script>

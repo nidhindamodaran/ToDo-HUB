@@ -52,7 +52,7 @@
       <%#= link_to ("<div class = 'share_link'>Share</div>").html_safe, controller: "tasks", action: "add_participants", id: @task.id , remote: true %>
       <div id = "users_list">
         <!-- for listing users -->
-        <% unless (@task.participants.count == @users.count)||(@task.user_id!= current_user.id) %>
+        <% unless (@task.user_id!= current_user.id) %>
           <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
         <% end %>
       </div>
@@ -144,5 +144,15 @@ var Count=0;
 if (<%= @task.completed == true %>) {
   $('#slider').slider({ disabled: true });
 }
+
+
+
+
+
+
+
+
+
+
 
 </script>

@@ -71,6 +71,11 @@ GEM
     flat-ui-rails (0.0.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gon (6.0.1)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.3.2)
@@ -130,6 +135,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails4-autocomplete (1.1.1)
+      rails (>= 3.0)
     railties (4.2.4)
       actionpack (= 4.2.4)
       activesupport (= 4.2.4)
@@ -138,6 +145,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
     ref (2.0.0)
+    request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     sass (3.4.19)
@@ -190,6 +198,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   flat-ui-rails
+  gon
   hirb
   jbuilder (~> 2.0)
   jquery-modal-rails
@@ -198,6 +207,7 @@ DEPENDENCIES
   mysql2
   paperclip
   rails (= 4.2.4)
+  rails4-autocomplete
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
