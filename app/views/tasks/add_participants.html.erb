@@ -27,7 +27,11 @@ elt.tagsinput({
 
 $( document ).ready(function() {
   <% @participants.each do |participant| %>
-    elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>' });
+    <% if participant.status == 'pending' %>
+      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>'+'(request sent)' });
+    <% else %>
+      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>' });
+    <% end %>
   <% end %>
 
   $('.search-query').bind('railsAutocomplete.select', function(event, data ){
@@ -48,6 +52,18 @@ elt.on('beforeItemAdd', function(event) {
     }else{
      $('#user_list').val(push_val);
     }
+
+});
+elt.on('beforeItemRemove', function(event) {
+  // event.item: contains the item
+  // event.cancel: set to true to prevent the item getting removed
+  var exist_val = $('#user_list').val();
+  var pop_val = exist_val.replace(event.item.value,'0')
+  if (exist_val){
+   $('#user_list').val(pop_val);
+  }else{
+   $('#user_list').val(pop_val);
+  }
 
 });
 </script>

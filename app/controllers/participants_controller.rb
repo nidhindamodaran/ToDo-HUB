@@ -7,20 +7,24 @@ class ParticipantsController < ApplicationController
     if params[:user_list].present?
       users_list = params[:user_list].split(',')
       users_list.each do |user_id|
-        participations = Participant.where(user_id:user_id.to_i)
-        participant = Participant.new(participant_params)
+        p user_id
+        unless user_id.to_i == 0
+          participations = Participant.where(user_id:user_id.to_i)
+          participant = Participant.new(participant_params)
 
-        if participations.count > 0
-          last_priority = participations.last.priority.to_i
-          priority = last_priority + 1
-          participant.priority = priority
-        else
-          participant.priority = 1
+          if participations.count > 0
+            last_priority = participations.last.priority.to_i
+            priority = last_priority + 1
+            participant.priority = priority
+          else
+            participant.priority = 1
+          end
+
+          participant.user_id = user_id.to_i
+          participant.save
         end
-
-        participant.user_id = user_id.to_i
-        participant.save
       end
+
 
       redirect_to task_path(params[:task_id]), notice: "Request sent successfully"
     else
