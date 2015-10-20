@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_task, except: [:index, :edit, :create, :active_tasks, :completed_tasks, :task_requests]
+  before_filter :find_task, except: [:index, :edit, :create, :active_tasks, :completed_tasks, :task_requests, :remove_share]
   before_filter :find_task_list, only: [:task_completion, :destroy]
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   def index
     @task = Task.new
@@ -70,13 +70,19 @@ class TasksController < ApplicationController
     @participant = Participant.new
     @participants = Participant.where(task_id: @task.id)
   end
-  
+
   def task_up
     @participant, @other_participant = @task.swap_tasks(current_user,"task_up")
   end
 
   def task_down
     @participant, @other_participant = @task.swap_tasks(current_user,"task_down")
+  end
+
+  def remove_share
+    task = Task.find(params[:task_id])
+    participant = task.participants.find_by_user_id(params[:user_id])
+    participant.destroy
   end
 
 

@@ -18,6 +18,5 @@
 //= require jquery.modal
 //= require autocomplete-rails
 //= require bootstrap-tagsinput
-//= require bootstrap-tagsinput-angular
 //= require tabs
 //= require turbolinks

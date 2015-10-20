@@ -29,7 +29,7 @@
     <div class = "col-sm-12 slider_header">
       Task Completion
     </div>
-    <div class = "col-sm-12 task_completion_slider_box">
+    <div class = "col-sm-12 task_completion_slider_box row">
 
       <div class = "pull-left slider_box">
 
@@ -50,12 +50,11 @@
     </div>
     <div class = 'col-sm-12'>
       <%#= link_to ("<div class = 'share_link'>Share</div>").html_safe, controller: "tasks", action: "add_participants", id: @task.id , remote: true %>
-      <div id = "users_list">
-        <!-- for listing users -->
+
         <% unless (@task.user_id!= current_user.id) %>
           <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
         <% end %>
-      </div>
+
 
     </div>
 
@@ -65,7 +64,7 @@
           <% if participant.status == 'confirmed' %>
             <%= link_to participant.user.name, user_path(participant.user) %>
             <span>
-              <% if creator(@task) == current_user %>
+              <% if participant.user == current_user %>
                 (You)
               <% end %>
             </span><% unless participant == @task.participants.last %> , <% end %>

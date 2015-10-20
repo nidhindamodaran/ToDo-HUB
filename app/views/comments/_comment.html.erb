@@ -11,7 +11,7 @@
           </div>
         </div>
     </div>
-    <div class = "col-sm-1 pull-right">
+    <div class = "col-sm-1 pull-right delete_button_icon">
       <% if comment.commenter == current_user.id %>
         <%= link_to ("<div class = 'delete_button'> </div>").html_safe, [comment.task,comment], method: :delete, remote: true %>
       <% end %>

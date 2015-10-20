@@ -2,7 +2,7 @@
 <hr />
 <div id = "user_modal">
   <%= autocomplete_field_tag :search, params[:search], autocomplete_user_name_participants_path, {class: "search-query", id: "tag_box", placeholder: "Type user's name"} %>
-  Shared with:<br />
+  <b>Shared with:</b><br />
   <input type="text" id = "tags">
   <div class = "share_links">
     <%= form_tag @participant do |f| %>
@@ -18,6 +18,7 @@
 <script>
 
 var elt = $('#tags');
+var task_id = '<%= @task.id %>'
 //elt.prop('disabled', true);
 elt.tagsinput({
   tagClass: 'label label-primary',
@@ -44,6 +45,7 @@ $( document ).ready(function() {
 });
 });
 var $elt = elt.tagsinput('input');
+var current_user_id = "<%= current_user.id %>"
 elt.on('beforeItemAdd', function(event) {
   var exist_val = $('#user_list').val();
   var push_val = event.item.value
@@ -57,13 +59,29 @@ elt.on('beforeItemAdd', function(event) {
 elt.on('beforeItemRemove', function(event) {
   // event.item: contains the item
   // event.cancel: set to true to prevent the item getting removed
-  var exist_val = $('#user_list').val();
-  var pop_val = exist_val.replace(event.item.value,'0')
-  if (exist_val){
-   $('#user_list').val(pop_val);
+  if (event.item.value == current_user_id){
+    event.cancel = true
   }else{
-   $('#user_list').val(pop_val);
+    var exist_val = $('#user_list').val();
+    if (exist_val.indexOf(event.item.value) >= 0){
+      var pop_val = exist_val.replace(event.item.value,'0')
+      if (exist_val){
+       $('#user_list').val(pop_val);
+      }else{
+       $('#user_list').val(pop_val);
+      }
+    }else{
+      $.ajax({
+        url: '/tasks/remove_share',
+        method: "POST",
+        dataType: "JSON",
+        data: {user_id:event.item.value, task_id:task_id}
+        }).success(function() {
+          console.log("Success")
+      });
+    }
   }
+
 
 });
 </script>

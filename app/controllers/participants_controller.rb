@@ -1,7 +1,7 @@
 class ParticipantsController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
-  autocomplete :user, :name
+  autocomplete :user, :name, extra_data: [:email]
 
   def create
     if params[:user_list].present?
@@ -28,7 +28,7 @@ class ParticipantsController < ApplicationController
 
       redirect_to task_path(params[:task_id]), notice: "Request sent successfully"
     else
-      redirect_to task_path(params[:task_id]), notice: "Select atleast one"
+      redirect_to task_path(params[:task_id]), notice: "Saved successfully"
 
     end
 
@@ -49,7 +49,7 @@ class ParticipantsController < ApplicationController
 
 
   def destroy
-    @participant = current_user.participants.find(params[:id])
+    @participant = Participant.find(params[:id])
     @participant.destroy
     if @participant.task.completed == true
       @tasks = Task.completed(current_user).paginate(page: params[:page], per_page: 10)

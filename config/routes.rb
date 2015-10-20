@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'active_tasks', :as => :active
       get 'completed_tasks', :as => :completed
       get 'task_requests', :as =>:requests
+      post :remove_share
     end
     resources :comments
   end
