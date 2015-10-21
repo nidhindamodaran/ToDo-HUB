@@ -39,13 +39,23 @@
 				</div>
 
       </div>
-      <div class ='pull-right'>
-            <% if @task.completed == false %>
-              <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, task_completion_task_path(id:@task.id, status:true) %>
-            <% else %>
-              <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, task_completion_task_path(@task.id, status:false) %>
-            <% end %>
-      </div>
+      <% if @task.user_id == current_user.id %>
+        <div class ='pull-right'>
+              <% if @task.completed == false %>
+                <%= link_to ("<div class = 'task_menu_btn comp_button'> </div>").html_safe, task_completion_task_path(id:@task.id, status:true) %>
+              <% else %>
+                <%= link_to ("<div class = 'task_menu_btn comp_button completed'> </div>").html_safe, task_completion_task_path(@task.id, status:false) %>
+              <% end %>
+        </div>
+      <% else %>
+        <div class ='pull-right'>
+              <% if @task.completed == false %>
+                <div class = 'task_menu_btn comp_button disabled'> </div>
+              <% else %>
+                <div class = 'task_menu_btn comp_button completed disabled'> </div>
+              <% end %>
+        </div>
+      <% end %>
 
     </div>
     <div class = 'col-sm-12'>

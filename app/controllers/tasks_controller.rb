@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_task, except: [:index, :edit, :create, :active_tasks, :completed_tasks, :task_requests, :remove_share]
-  before_filter :find_task_list, only: [:task_completion, :destroy]
+  before_filter :find_task_list, only: [:task_completion, :destroy, :task_up, :task_down]
+  before_filter :find_active_tasks, only: [:index, :create]
   respond_to :html, :js, :json
 
   def index
     @task = Task.new
-    @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -16,24 +16,23 @@ class TasksController < ApplicationController
   end
 
   def create
-   @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
-   @task = current_user.tasks.new(task_params)
-   @task.user_id = current_user.id
-   @save_flag = @task.save
+    @task = current_user.tasks.new(task_params)
+    @task.user_id = current_user.id
+    @save_flag = @task.save
   end
 
   def update
     if @task.update_attributes(task_params)
-      redirect_to task_path(@task.id), notice:"Task updated Successfully"
+      redirect_to task_path(@task.id), notice: 'Task updated Successfully'
     else
-      redirect_to task_path(@task.id), notice:"Task updation Failed"
+      redirect_to task_path(@task.id), notice: 'Task updation Failed'
     end
   end
 
   def destroy
     @task.destroy
     respond_with(@task) do |format|
-      format.html{redirect_to tasks_path}
+      format.html { redirect_to tasks_path }
     end
   end
 
@@ -50,19 +49,18 @@ class TasksController < ApplicationController
   end
 
   def task_requests
-    @participants  = Participant.where(status: "pending", user_id:current_user.id)
+    @participants  = Participant.where(status: 'pending', user_id: current_user.id)
     @tasks = Task.all
   end
 
   def task_completion
-    if @task.update_attributes(completed:params[:status])
+    if @task.update_attributes(completed: params[:status])
       respond_with(@task) do |format|
-        format.html{redirect_to task_path(params[:id])}
+        format.html { redirect_to task_path(params[:id]) }
       end
     else
-      redirect_to task_path @task, flash: { error:"Task completion error" }
+      redirect_to task_path @task, flash: { error: 'Task completion error' }
     end
-
   end
 
   def add_participants
@@ -72,11 +70,11 @@ class TasksController < ApplicationController
   end
 
   def task_up
-    @participant, @other_participant = @task.swap_tasks(current_user,"task_up")
+    @task.swap_tasks(current_user, 'task_up')
   end
 
   def task_down
-    @participant, @other_participant = @task.swap_tasks(current_user,"task_down")
+    @task.swap_tasks(current_user, 'task_down')
   end
 
   def remove_share
@@ -84,7 +82,6 @@ class TasksController < ApplicationController
     participant = task.participants.find_by_user_id(params[:user_id])
     participant.destroy
   end
-
 
   private
 
@@ -98,6 +95,10 @@ class TasksController < ApplicationController
     else
       @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
     end
+  end
+
+  def find_active_tasks
+    @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
   end
 
   def task_params

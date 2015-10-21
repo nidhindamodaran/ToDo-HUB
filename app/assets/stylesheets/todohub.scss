@@ -90,6 +90,7 @@ textarea.form-control {
     background-color:transparent !important;
     width:100% !important;
     height:100%;
+    padding-left: 15px;
 }
 
 input.new_task, input.new_task:hover, input.new_task:focus{
@@ -595,9 +596,7 @@ h4{
 .list-group-item.comment{
   border-radius: 0px !important;
 }
-#comments_listing > li:first-child {
-  border-top: 0px !important;
-}
+
 .panel-body{
   display: flex;
 }

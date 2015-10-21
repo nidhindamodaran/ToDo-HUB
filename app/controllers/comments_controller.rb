@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment.user_name = current_user.name
     @comment.save
   end
-  
+
   def destroy
     @comment = @task.comments.find(params[:id])
     @comment.destroy
@@ -16,11 +16,11 @@ class CommentsController < ApplicationController
 
   private
 
-    def find_task
-      @task = Task.find(params[:task_id])
-    end
+  def find_task
+    @task = Task.find(params[:task_id])
+  end
 
-    def comment_params
-      params.require(:comment).permit(:commenter, :comment)
-    end
+  def comment_params
+    params.require(:comment).permit(:commenter, :comment)
+  end
 end
