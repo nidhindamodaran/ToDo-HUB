@@ -1,11 +1,11 @@
 module TasksHelper
   def total_completion(task)
-    total = 0;
+    total = 0
     count = task.participants.count
     task.participants.each do |participant|
       total += participant.progression
     end
-    avg_progression = total/count
+    total/count
   end
 
   def creator(task)

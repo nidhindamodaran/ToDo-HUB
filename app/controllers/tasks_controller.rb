@@ -59,14 +59,11 @@ class TasksController < ApplicationController
         format.html { redirect_to task_path(params[:id]) }
       end
     else
-      redirect_to task_path @task, flash: { error: 'Task completion error' }
+      redirect_to task_path @task, notice: 'Task completion error'
     end
   end
 
   def add_participants
-    @users = User.all
-    @participant = Participant.new
-    @participants = Participant.where(task_id: @task.id)
   end
 
   def task_up
@@ -75,12 +72,6 @@ class TasksController < ApplicationController
 
   def task_down
     @task.swap_tasks(current_user, 'task_down')
-  end
-
-  def remove_share
-    task = Task.find(params[:task_id])
-    participant = task.participants.find_by_user_id(params[:user_id])
-    participant.destroy
   end
 
   private
@@ -102,6 +93,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description)
+    params.require(:task).permit(:title, participants_attributes:[:id, :user_id, :_destroy])
   end
 end

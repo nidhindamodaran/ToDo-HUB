@@ -19,16 +19,16 @@
   </ul>
 </div>
 <!-- This div is used for rendering results when clicking above tabs -->
-  <div id="show_tabs" class = "span9">
-    <div id="tasks_lists">
-      <% if @tasks.count > 0 %>
-        <%= render @tasks %>
-      <% else %>
-        <div class="alert alert-danger">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          You dont have any tasks assigned.
-        </div>
-      <% end %>
-    </div>
-      <%= will_paginate @tasks %>
+<div id="show_tabs" class = "span9">
+  <div id="tasks_lists">
+    <% if @tasks.count > 0 %>
+      <%= render @tasks %>
+    <% else %>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        You dont have any tasks assigned.
+      </div>
+    <% end %>
   </div>
+    <%= will_paginate @tasks %>
+</div>

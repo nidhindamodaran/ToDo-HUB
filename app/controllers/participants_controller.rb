@@ -4,18 +4,6 @@ class ParticipantsController < ApplicationController
   autocomplete :user, :name, extra_data: [:email]
 
   def create
-    if params[:user_list].present?
-      users_list = params[:user_list].split(',')
-      users_list.each do |user_id|
-        next if user_id.to_i == 0
-        participant = Participant.new(participant_params)
-        participant.user_id = user_id.to_i
-        participant.save
-      end
-      redirect_to task_path(params[:task_id]), notice: 'Request sent successfully'
-    else
-      redirect_to task_path(params[:task_id]), notice: 'Saved changes'
-    end
   end
 
   def accept_request

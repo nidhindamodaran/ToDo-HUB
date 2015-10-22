@@ -1,17 +1,18 @@
 class Task < ActiveRecord::Base
   scope :completed, lambda { |user|
     includes(:participants)
-      .order('participants.priority desc')
-      .where(participants: { status: 'confirmed', user_id: user.id }, completed: true)
+    .order('participants.priority desc')
+    .where(participants: { status: 'confirmed', user_id: user.id }, completed: true)
   }
   scope :active, lambda { |user|
     includes(:participants)
-      .order('participants.priority desc')
-      .where(participants: { status: 'confirmed', user_id: user.id}, completed: false)
-   }
+    .order('participants.priority desc')
+    .where(participants: { status: 'confirmed', user_id: user.id }, completed: false)
+  }
   has_many :participants,  dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :users, through: :participants
+  accepts_nested_attributes_for :participants, allow_destroy: true
   validates :title, presence: true, length: { minimum: 1 }
 
   after_create :participant_create
@@ -23,22 +24,22 @@ class Task < ActiveRecord::Base
     if action == 'task_up'
       if completed == true
         other_participant = user.participants.joins(:task)
-                            .where('participants.priority > ? AND tasks.completed = ?', priority, true)
-                            .order('priority DESC').last
+        .where('participants.priority > ? AND tasks.completed = ?', priority, true)
+        .order('priority DESC').last
       else
         other_participant = user.participants.joins(:task)
-                            .where('participants.priority > ? AND tasks.completed = ?', priority, false)
-                            .order('priority DESC').last
+        .where('participants.priority > ? AND tasks.completed = ?', priority, false)
+        .order('priority DESC').last
       end
     else
       if completed == true
         other_participant =  user.participants.joins(:task)
-                              .where('participants.priority < ? AND tasks.completed = ?', priority, true)
-                              .order('priority DESC').first
+        .where('participants.priority < ? AND tasks.completed = ?', priority, true)
+        .order('priority DESC').first
       else
         other_participant =  user.participants.joins(:task)
-                              .where('participants.priority < ? AND tasks.completed = ?', priority, false)
-                              .order('priority DESC').first
+        .where('participants.priority < ? AND tasks.completed = ?', priority, false)
+        .order('priority DESC').first
       end
     end
     swap_priority(participant, other_participant)

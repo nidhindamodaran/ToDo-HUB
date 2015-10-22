@@ -5,20 +5,19 @@
   <b>Shared with:</b><br />
   <input type="text" id = "tags">
   <div class = "share_links">
-    <%= form_tag @participant do |f| %>
-      <%= hidden_field_tag :task_id, @task.id.to_i %>
-      <%= hidden_field_tag :user_list %>
-      <%= button_tag :Save, {class: 'share_link save pull-left'}%>
+    <%= form_for @task do |f| %>
+      <%= f.hidden_field :task_id, value: @task.id.to_i %>
+      <div id ="users_list_b"></div>
+      <%= f.button :Save, {class: 'share_link save pull-left'}%>
     <% end %>
-    <%#= link_to_modal ("<div class = 'share_link save pull-left'>Save</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
     <%= link_to ("<div class = 'delete_confirmation_cancel_button pull-left'><u>Cancel</u></div>").html_safe, task_path(@task.id),:rel => "modal:close" %>
   </div>
 </div>
-
 <script>
 
 var elt = $('#tags');
-var task_id = '<%= @task.id %>'
+var users_b = $('#users_list_b');
+var task_id = '<%= @task.id %>';
 //elt.prop('disabled', true);
 elt.tagsinput({
   tagClass: 'label label-primary',
@@ -27,11 +26,11 @@ elt.tagsinput({
 });
 
 $( document ).ready(function() {
-  <% @participants.each do |participant| %>
+  <% @task.participants.each do |participant| %>
     <% if participant.status == 'pending' %>
-      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>'+'(request sent)' });
+      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>'+'(request sent)', "id": '<%= participant.id %>' });
     <% else %>
-      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>' });
+      elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>', "id": '<%= participant.id %>' });
     <% end %>
   <% end %>
 
@@ -45,40 +44,22 @@ $( document ).ready(function() {
 });
 });
 var $elt = elt.tagsinput('input');
-var current_user_id = "<%= current_user.id %>"
+var current_user_id = "<%= current_user.id %>";
 elt.on('beforeItemAdd', function(event) {
-  var exist_val = $('#user_list').val();
-  var push_val = event.item.value
-    if (exist_val){
-     $('#user_list').val(exist_val+','+push_val);
-    }else{
-     $('#user_list').val(push_val);
-    }
-
+  var push_val = event.item.value;
+  users_b.append($('<input>',{'id':'user'+push_val,'type':'hidden','name':'task[participants_attributes]['+push_val+'][user_id]','value':push_val}));
 });
 elt.on('beforeItemRemove', function(event) {
-  // event.item: contains the item
-  // event.cancel: set to true to prevent the item getting removed
-  if (event.item.value == current_user_id){
-    event.cancel = true
-  }else{
-    var exist_val = $('#user_list').val();
-    if (exist_val.indexOf(event.item.value) >= 0){
-      var pop_val = exist_val.replace(event.item.value,'0')
-      if (exist_val){
-       $('#user_list').val(pop_val);
-      }else{
-       $('#user_list').val(pop_val);
-      }
-    }else{
-      $.ajax({
-        url: '/tasks/remove_share',
-        method: "POST",
-        dataType: "JSON",
-        data: {user_id:event.item.value, task_id:task_id}
-        }).success(function() {
-          console.log("Success")
-      });
+  var pop_val = event.item.value;
+  if (pop_val == current_user_id){
+    event.cancel = true;
+  } else {
+    if ($('#user'+pop_val).length){
+      $('#user'+pop_val).remove();
+    } else {
+      users_b.append($('<input>',{'id':'user'+pop_val,'type':'hidden','name':'task[participants_attributes]['+pop_val+'][id]','value': event.item.id}));
+      users_b.append($('<input>',{'id':'user'+pop_val,'type':'hidden','name':'task[participants_attributes]['+pop_val+'][user_id]','value':pop_val}));
+      users_b.append($('<input>',{'id':'user'+pop_val,'type':'hidden','name':'task[participants_attributes]['+pop_val+'][_destroy]','value': 1}));
     }
   }
 
