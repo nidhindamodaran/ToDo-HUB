@@ -46,7 +46,6 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.2.2)
-    byebug (6.0.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -194,7 +193,6 @@ PLATFORMS
 DEPENDENCIES
   active_type
   bootstrap-sass-rails (~> 2.2.2.0)
-  byebug
   coffee-rails (~> 4.1.0)
   devise
   flat-ui-rails
