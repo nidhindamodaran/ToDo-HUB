@@ -2,7 +2,7 @@
   <div class = "row">
     <div class = "col-sm-12">
       <div class = "col-sm-6"><!-- User Display Picture -->
-        <%= image_tag @user.avatar.url(:medium), class: "img-circle" %>
+        <%= image_tag @user.avatar.url(:medium), class: "img-thumbnail" %>
       </div>
       <div class = "col-sm-6">
         <div class = "col-sm-12 user_show_name text-uppercase">
@@ -20,9 +20,54 @@
     <div class = "col-sm-12 ">
       <div class = "edit_profile_link">
         <% if @user.id == current_user.id %>
-          <%= link_to_modal ("<div class = 'share_link'>Edit Profile</div>").html_safe, edit_user_path(@user.id), data:{remote: true} %>
+          <%#= link_to_modal ("<div class = 'share_link'>Edit Profile</div>").html_safe, edit_user_path(@user.id), data:{remote: true} %>
+           <div id="example-popup" class="popup">
+            <div class="popup-body">
+              <%=render 'edit' %>
+            </div>
+          </div>
+          <div class="popup-overlay"></div>
+          <div class="share_link" data-popup-target="#example-popup">
+            Edit
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function() {
+
+    $('[data-popup-target]').click(function () {
+        $('html').addClass('overlay');
+        var activePopup = $(this).attr('data-popup-target');
+        $(activePopup).addClass('visible');
+
+    });
+
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27 && $('html').hasClass('overlay')) {
+            clearPopup();
+        }
+    });
+
+    $('.popup-exit').click(function () {
+        clearPopup();
+
+    });
+
+    $('.popup-overlay').click(function () {
+        clearPopup();
+    });
+
+    function clearPopup() {
+        $('.popup.visible').addClass('transitioning').removeClass('visible');
+        $('html').removeClass('overlay');
+
+        setTimeout(function () {
+            $('.popup').removeClass('transitioning');
+        }, 200);
+    }
+
+});
+</script>

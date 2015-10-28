@@ -14,9 +14,6 @@ class UsersController < ApplicationController
     @tasks = Task.where(user_id: params[:id])
   end
 
-  def edit
-  end
-
   def update
     if @user.update_attributes(user_params)
       redirect_to @user, flash: { notice: 'Updated succesfully' }

@@ -5,10 +5,14 @@
       <%= image_tag current_user.avatar.url(:medium), class: "img-circle" %>
     </div>
     <%=  f.text_field :name, class:'form-control', autofocus:true %>
-    <%=  f.text_area :about, class:'form-control', autofocus:true %>
+    <%=  f.text_area :about, class:'form-control', autofocus:true, placeholder: "About You" %>
     <span class="btn btn-default btn-file">
       Select Profile Picture <%= f.file_field :avatar, class:'btn btn-warning form-control' %>
     </span>
-    <%= f.submit :submit, class: "btn btn-success form-control" %>
+    <div class = "col-sm-12 row user_save">
+    <%= f.submit :submit, value: "Save", class: 'share_link save pull-left' %>
   <% end %>
+  <%= link_to ("<div class = 'delete_confirmation_cancel_button pull-left popup-exit'><u>Cancel</u></div>").html_safe, :rel => "modal:close" %>
+    </div>
+    
 </div>

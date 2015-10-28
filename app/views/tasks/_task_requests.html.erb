@@ -2,11 +2,11 @@
 <div class="tab-pane active" id="task_requests">
      <% if @participants.count > 0 %>
       <% @participants.each do |participant| %>
-         <div class="panel panel-default" id="request_display_panel_<%= participant.id %>">
+         <div class="panel panel-default request" id="request_display_panel_<%= participant.id %>">
              <div class="panel-body">
                 <div class = "col-sm-12">
                   <div class = "col-sm-8">
-                      <strong><%= participant.task.title %></strong> is shared with you.
+                      <strong><span class= "text-success"><%= truncate(participant.task.title, length: 27) %></span></strong> is shared with you.
                   </div>
                   <div class = "col-sm-4">
                     <div class = "col-sm-6">

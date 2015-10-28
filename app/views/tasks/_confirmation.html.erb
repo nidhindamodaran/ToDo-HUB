@@ -13,8 +13,15 @@
         <% end %>
       </div>
       <div class = "col-sm-6">
-        <%= link_to ("<div class = 'delete_confirmation_cancel_button'><u>No</u></div>").html_safe, tasks_path %>
+        <%#= link_to ("<div class = 'delete_confirmation_cancel_button'><u>No</u></div>").html_safe, tasks_path %>
+        <div class = 'delete_confirmation_cancel_button'><u>No</u></div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $('.delete_confirmation_cancel_button').on('click', function(){
+    $('.delete_box').hide();
+  });
+</script>

@@ -1,3 +1,4 @@
 //Appends newly created task to task list
 $('#comments_listing').prepend("<%= escape_javascript(render(:partial => @comment)) %>")
 $('.new_comment').val('');
+$('html, body').animate({scrollTop: '300px'}, 500);

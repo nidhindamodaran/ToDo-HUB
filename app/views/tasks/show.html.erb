@@ -33,10 +33,10 @@
 
       <div class = "pull-left slider_box">
 
-        <div id="slider_group">
-					<div id="slider"></div>
-					<span id="completion_perc"><%= @participant.progression.to_i %>%</span>
-				</div>
+          <div id="slider_group">
+              <div id="slider"></div>
+              <span id="completion_perc"><%= @participant.progression.to_i %>%</span>
+          </div>
 
       </div>
       <% if @task.user_id == current_user.id %>
@@ -62,7 +62,16 @@
       <%#= link_to ("<div class = 'share_link'>Share</div>").html_safe, controller: "tasks", action: "add_participants", id: @task.id , remote: true %>
 
         <% unless (@task.user_id!= current_user.id) %>
-          <%= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
+          <%#= link_to_modal ("<div class = 'share_link'>Share</div>").html_safe, add_participants_task_path(@task.id), data:{remote: true} %>
+          <div id="example-popup" class="popup">
+            <div class="popup-body">
+              <%=render 'add_participants' %>
+            </div>
+          </div>
+          <div class="popup-overlay"></div>
+          <div class="share_link" data-popup-target="#example-popup">
+            Share
+          </div>
         <% end %>
 
 
@@ -109,7 +118,7 @@
 
 <div class = 'comments_panel'>
   <ul class="list-group", id="comments_listing">
-    <%= render @comments %>
+    <%= render @comments.reverse %>
   </ul>
   <%= will_paginate @comments %>
   <%= render 'comments/form' %>
@@ -145,7 +154,7 @@ var Count=0;
         data: {id:id ,progress:progress }
         });
       }
-    }, 500);
+    }, 1500);
 
     }
 
@@ -154,14 +163,48 @@ if (<%= @task.completed == true %>) {
   $('#slider').slider({ disabled: true });
 }
 
+$(document).ready(function() {
 
+    $('[data-popup-target]').click(function () {
+        $('html').addClass('overlay');
+        var activePopup = $(this).attr('data-popup-target');
+        $(activePopup).addClass('visible');
 
+    });
 
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27 && $('html').hasClass('overlay')) {
+            clearPopup();
+        }
+    });
 
+    $('.popup-exit').click(function () {
+        clearPopup();
 
+    });
 
+    $('.popup-overlay').click(function () {
+        clearPopup();
+    });
 
+    function clearPopup() {
+        $('.popup.visible').addClass('transitioning').removeClass('visible');
+        $('html').removeClass('overlay');
 
+        setTimeout(function () {
+            $('.popup').removeClass('transitioning');
+        }, 200);
+    }
 
-
+});
 </script>
+
+
+
+
+
+
+
+
+
+

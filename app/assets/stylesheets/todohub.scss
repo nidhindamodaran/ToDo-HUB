@@ -64,7 +64,7 @@ label{
     color:#34495e;
     font-family: 'Open Sans';
     font-size: 18px;
-    font-weight: 400;
+    font-weight: lighter !important;
 }
 .link_panel.right{
     float:right;
@@ -81,6 +81,17 @@ a:hover{
 textarea.form-control {
     height: 100px;
     margin-top: 20px;
+    background-color: #F3F3F3;
+    box-shadow: none;
+    outline:0;
+    border-color: #cccccc;
+    resize: vertical;
+    
+}
+textarea.form-control:focus{
+    background-color: white;
+    box-shadow: none !important;
+    border-color: #cccccc;
 }
 .new_task, .new_task:focus{
     font-family: 'Open Sans';
@@ -90,7 +101,6 @@ textarea.form-control {
     background-color:transparent !important;
     width:100% !important;
     height:100%;
-    padding-left: 15px;
 }
 
 input.new_task, input.new_task:hover, input.new_task:focus{
@@ -101,6 +111,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     color:#34495e;
     width:100% !important;
     height:60px;
+    padding-left: 10px;
 }
 .input-group.task{
     width: 100%;
@@ -223,7 +234,12 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 .delete_confirmation_cancel_button{
     color:#34495e;
     font-family: 'Open Sans';
+    cursor: pointer;
 }
+.delete_confirmation_cancel_button:hover{
+    color:#00BB9B;
+}
+
 .alert{
     color:#34495e;
     padding-left: 30px;
@@ -271,6 +287,8 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     color:#34495e;
     margin-left: 15px;
     background: white;
+    cursor: pointer;
+
 }
 .share_link.cancel{
     float:right;
@@ -306,12 +324,15 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     text-align: center;
 }
 .modal{
-    height:auto !important;
-    max-height: 55%;
-    width:40% !important;
-    padding:10px;
-    position: relative;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    z-index: -9999;
+    overflow-y: auto;
+    min-height: 150px;
+    max-height: 60%;
 }
+
 .share_link.accept_request {
     float:right;
     width:80px;
@@ -336,7 +357,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     word-break: keep-all;
 }
 .edit_profile_link, .edit_profile_link > a{
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 16px;
     font-family: 'Open Sans';
     float:right;
@@ -382,6 +403,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     height: 20px;
     width: 5px;
     padding-left: 5px; //add this
+    z-index: 0 !important;
 }
 .ui-slider {
     height:20px;
@@ -445,6 +467,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
     bottom: 2px;
     left: 300px;
     z-index: 1;
+    cursor: pointer;
 }
 #slider_group {
     position: relative;
@@ -479,6 +502,7 @@ input.new_task, input.new_task:hover, input.new_task:focus{
 }
 .ui-slider-range{
     background: #fff;
+    z-index: 0px !important;
 }
 .ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min{
     background: rgb(255, 255, 255);
@@ -595,7 +619,10 @@ h4{
 }
 .list-group-item.comment{
   border-radius: 0px !important;
+  z-index: 0;
+  margin-bottom: -4px !important;
 }
+
 
 .panel-body{
   display: flex;
@@ -666,6 +693,7 @@ padding-bottom: 40px !important;
 
 #user_modal .col-sm-12{
   margin-left: 0 !important;
+  margin-bottom: 20px !important;
 }
 .panel.task{
   margin-bottom: 20px !important;
@@ -677,3 +705,111 @@ border-bottom: 0px !important;
 .modal > .close-modal{
   display: none !important;
 }
+.share_links{
+    margin_bottom : 50px;
+    height: 50px;
+}
+
+
+
+#popup_window{
+    padding: 10px;
+    background: #267E8A;
+    cursor: pointer;
+    color: #FCFCFC;
+}
+.popup-overlay {
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(196, 196, 196, .85);
+    top: 0;
+    left: 100%;
+    opacity: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-transition: opacity .2s ease-out;
+    -moz-transition: opacity .2s ease-out;
+    -ms-transition: opacity .2s ease-out;
+    -o-transition: opacity .2s ease-out;
+    transition: opacity .2s ease-out;
+}
+.overlay .popup-overlay {
+    opacity: 1;
+    left: 0
+}
+
+.popup {
+    position: absolute;
+    top: -965%;
+    left: 10%;
+    z-index: -9999;
+}
+.popup .popup-body {
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #f7f7f7));
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background: -o-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f7f7f7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f7f7f7', GradientType=0);
+    opacity: 0;
+    min-height: 200px;
+    width: 600px;
+    padding: 20px;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-transition: opacity .2s ease-out;
+    -moz-transition: opacity .2s ease-out;
+    -ms-transition: opacity .2s ease-out;
+    -o-transition: opacity .2s ease-out;
+    transition: opacity .2s ease-out;
+    position: relative;
+    -moz-box-shadow: 1px 2px 3px 1px rgb(185, 185, 185);
+    -webkit-box-shadow: 1px 2px 3px 1px rgb(185, 185, 185);
+    box-shadow: 1px 2px 3px 1px rgb(185, 185, 185);
+    border: 1px solid #e9e9e9;
+}
+.popup.visible, .popup.transitioning {
+    z-index: 9999;
+}
+.popup.visible .popup-body {
+    opacity: 1;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+.popup .popup-exit {
+    
+}
+.popup .popup-content {
+    overflow-y: auto;
+}
+.popup-content .popup-title {
+    font-size: 24px;
+    border-bottom: 1px solid #e9e9e9;
+    padding-bottom: 10px;
+}
+.popup-content p {
+    font-size: 13px;
+    text-align: justify;
+}
+
+
+.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content{
+    z-index:9999 !important;
+}
+.jumbotron{
+    margin-bottom: 0px !important;
+}
+
+
+.col-sm-12.row.user_save{
+    margin-top: 20px;
+}
+
+.nav.nav-tabs > li:active{
+    background: white !important;
+    
+}
+.panel.request{
+    margin-bottom: 20px !important;
+} 
