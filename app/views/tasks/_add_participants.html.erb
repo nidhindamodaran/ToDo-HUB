@@ -33,6 +33,7 @@ $( document ).ready(function() {
     <% else %>
       elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>', "id": '<%= participant.id %>' });
     <% end %>
+    users_b.empty();
   <% end %>
 
   $('.search-query').bind('railsAutocomplete.select', function(event, data ){
@@ -44,6 +45,7 @@ $( document ).ready(function() {
     }
 });
 });
+users_b.empty();
 var $elt = elt.tagsinput('input');
 var current_user_id = "<%= current_user.id %>";
 elt.on('beforeItemAdd', function(event) {
