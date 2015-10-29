@@ -1,7 +1,7 @@
 class ParticipantsController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
-  autocomplete :user, :name, extra_data: [:email]
+  autocomplete :user, :name, extra_data: [:email], :scopes => [:other_users]
 
   def create
   end

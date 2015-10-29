@@ -86,7 +86,7 @@ textarea.form-control {
     outline:0;
     border-color: #cccccc;
     resize: vertical;
-    
+
 }
 textarea.form-control:focus{
     background-color: white;
@@ -778,7 +778,7 @@ border-bottom: 0px !important;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 .popup .popup-exit {
-    
+
 }
 .popup .popup-content {
     overflow-y: auto;
@@ -808,8 +808,19 @@ border-bottom: 0px !important;
 
 .nav.nav-tabs > li:active{
     background: white !important;
-    
+
 }
 .panel.request{
     margin-bottom: 20px !important;
-} 
+}
+.ui-state-focus{
+  background: #F0F0F0 !important;
+  outline: none !important;
+  border: 1px solid #D8D8D8 !important;
+}
+li{
+  outline:none;
+}
+a:focus{
+  outline: none !important;
+}

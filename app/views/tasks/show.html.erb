@@ -80,21 +80,15 @@
     <div class = "col-sm-12 shared_people">
         <strong>Shared With :</strong>
         <% @task.participants.each do |participant| %>
+          <% next if participant.user_id == current_user.id %>
           <% if participant.status == 'confirmed' %>
             <%= link_to participant.user.name, user_path(participant.user) %>
-            <span>
-              <% if participant.user == current_user %>
-                (You)
-              <% end %>
-            </span><% unless participant == @task.participants.last %> , <% end %>
-
+            <% unless participant == @task.participants.last %>
+              &nbsp;
+            <% end %>
           <% end %>
         <% end %>
-
     </div>
-
-
-
 
 
   </div>
@@ -198,13 +192,3 @@ $(document).ready(function() {
 
 });
 </script>
-
-
-
-
-
-
-
-
-
-

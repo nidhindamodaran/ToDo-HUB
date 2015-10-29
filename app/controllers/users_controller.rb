@@ -16,9 +16,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      redirect_to @user, flash: { notice: 'Updated succesfully' }
+      redirect_to @user, notice: 'Saved succesfully'
     else
-      redirect_to @user, flash: { notice: 'Updation not success' }
+      redirect_to @user, notice: 'Saving not success'
     end
   end
 

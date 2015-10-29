@@ -27,6 +27,7 @@ elt.tagsinput({
 
 $( document ).ready(function() {
   <% @task.participants.each do |participant| %>
+    <% next if participant.user_id == current_user.id %>
     <% if participant.status == 'pending' %>
       elt.tagsinput('add', { "value": '<%= participant.user_id %>' , "text": '<%= participant.user.name %>'+'(request sent)', "id": '<%= participant.id %>' });
     <% else %>

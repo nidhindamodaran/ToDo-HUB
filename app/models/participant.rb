@@ -9,9 +9,8 @@ class Participant < ActiveRecord::Base
 
   def create_comment
     return unless progression_changed?
-    task = Task.find(task_id)
-    user = User.find(user_id)
-    task.comments.create(user_name: user.name, comment: "#{user.name} updated his progress from <span class = 'text-success'>#{progression_was}</span> to <span class = 'text-success'>#{progression}</span>", commenter: user.id)
+    task.comments.create(user_name: user.name, comment: "#{user.name} updated his progress from <span class = 'text-success'>
+    #{progression_was}</span> to <span class = 'text-success'>#{progression}</span>", commenter: user.id)
   end
 
   def set_priority

@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :participants,  dependent: :destroy
   has_attached_file :avatar, styles: { medium: '200x200>', thumb: '30x30>' }, default_url: '/images/:attachment/missing_:style.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  scope :other_users, -> { where.not(id: Todo.current_user.id) }
 end
