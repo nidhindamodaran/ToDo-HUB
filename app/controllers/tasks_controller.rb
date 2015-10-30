@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_task, except: [:index, :edit, :create, :active_tasks, :completed_tasks, :task_requests, :remove_share]
   before_filter :find_task_list, only: [:task_completion, :destroy, :task_up, :task_down]
-  before_filter :find_active_tasks, only: [:index, :create]
+  before_filter :find_active_tasks, only: [:index, :create, :active_tasks]
   respond_to :html, :js, :json
 
   def index
@@ -41,7 +41,6 @@ class TasksController < ApplicationController
   end
 
   def active_tasks
-    @tasks = Task.active(current_user).paginate(page: params[:page], per_page: 10)
   end
 
   def completed_tasks

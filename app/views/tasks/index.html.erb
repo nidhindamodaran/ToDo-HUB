@@ -29,11 +29,7 @@
         You dont have any tasks assigned.
       </div>
     <% end %>
+
   </div>
-    <%= will_paginate @tasks %>
+  <%= will_paginate @tasks %>
 </div>
-<script>
-  $(document).ready(function(){
-    $('.pagination').hide();
-  });
-</script>

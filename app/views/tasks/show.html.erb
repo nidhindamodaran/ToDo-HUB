@@ -3,7 +3,7 @@
     <div class="col-sm-8">
       <div class = "col-sm-12">
         <div class= "task_title">
-          <%= link_extract(@task.title).html_safe %>
+          <%= sanitize(link_extract(@task.title)) %>
         </div>
 
       </div>

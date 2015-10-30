@@ -35,6 +35,7 @@ gem 'jquery-modal-rails'
 gem 'paperclip'
 gem 'rails4-autocomplete'
 gem 'gon'
+gem 'jquery-turbolinks'
 #gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 
 # Use ActiveModel has_secure_password

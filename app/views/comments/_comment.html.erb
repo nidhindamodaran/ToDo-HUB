@@ -1,7 +1,7 @@
 <li class="list-group-item comment row", id = "comment_panel_<%= comment.id %>">
   <div class = "col-sm-12 comment_board">
     <div class = "col-sm-10 comment_display">
-      <%= link_extract(comment.comment).html_safe %>
+      <%= sanitize(link_extract(comment.comment)) %>
         <div class = "comment_details">
           <div class = "commenter_name">
             <%= find_commenter(comment).name %>

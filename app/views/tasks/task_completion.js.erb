@@ -1,6 +1,5 @@
-/*
-$('#task_display_panel_<%= params[:id] %>').fadeOut();
-setTimeout(function(){
-$("#tasks_lists").html("<%= j(render(partial:@tasks)) %>");
-}, 250);
-*/
+
+//$('#task_display_panel_<%= params[:id] %>').fadeOut();
+//setTimeout(function(){
+$('#task_display_panel_<%= params[:id] %>').replaceWith("<%= j(render @task) %>");
+//}, 250);
