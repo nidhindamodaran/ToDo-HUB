@@ -95,9 +95,11 @@
   <!-- Overall task percentage -->
   <% if @task.user_id == current_user.id %>
       <div class = "overall_progress">
-            <div class="progress">
-            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= total_completion(@task) %>%"></div>
-          </div>
+            <a href="#" data-toggle="tooltip" title="<%= total_completion(@task) %>%">
+              <div class="progress">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= total_completion(@task) %>%"></div>
+            </div>
+            </a>
       </div>
   <% end %>
   <!---------------------------------------->
